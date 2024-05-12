@@ -1,7 +1,7 @@
 import Player
 import Screen
 import pygame
-
+from Map import Map
 
 pygame.init()
 
@@ -17,8 +17,10 @@ running = True
 
 while running:
     pygame.display.update()
-    screen.update_screen(player)
+    screen.update_screen(screen.map.obj_list, player)
     player.move()
+    if pygame.key.get_pressed()[pygame.K_q]:
+        screen.map.del_brick()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
