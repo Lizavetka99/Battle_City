@@ -1,4 +1,5 @@
 import pygame
+import Screen
 
 
 CORRECT_SDVIG = {
@@ -36,4 +37,7 @@ class Bullet:
     def Move(self):
         self.X += MOVEMENT[self.direction][0]
         self.Y += MOVEMENT[self.direction][1]
+
+        if self.X > Screen.WIDTH or self.X < -300 or self.Y > Screen.HEIGHT or self.Y < -300:
+            self.is_shooted = False
 

@@ -21,7 +21,7 @@ while running:
     pygame.display.update()
     screen.update_screen(screen.map.obj_list, player)
     player.move()
-    if pygame.key.get_pressed()[pygame.K_SPACE]:
+    if pygame.key.get_pressed()[pygame.K_SPACE] and (not bullet.is_shooted):
         bullet.setPosition()
         screen.screen.blit(bullet.texture, (bullet.X, bullet.Y))
     if bullet.is_shooted:
