@@ -39,6 +39,7 @@ class Bullet:
         self.collider = pygame.rect.Rect(self.X, self.Y, 32, 32)
 
     def Move(self):
+        self.collider = pygame.rect.Rect(self.X, self.Y, 32, 32)
         self.X += MOVEMENT[self.direction][0]
         self.Y += MOVEMENT[self.direction][1]
 
