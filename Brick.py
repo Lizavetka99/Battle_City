@@ -8,5 +8,6 @@ class Brick(Fencing):
         self.fencing = (pos_x, pos_y)
         self.image = brick_wall
 
-
+    def destroy(self):
+        del self
 

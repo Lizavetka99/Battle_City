@@ -25,7 +25,7 @@ class Screen:
         self.screen.blit(self.background, (0, 0))
         self.screen.blit(player.player_texture, (player.pos_x, player.pos_y))
         for obj in obj_list:
-            self.screen.blit(obj.image, (0, 0))
+            self.screen.blit(obj.image, (obj.fencing))
 
     def __get_map__(self):
         return self.map

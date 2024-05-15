@@ -43,8 +43,8 @@ class Bullet:
         self.Y += MOVEMENT[self.direction][1]
 
         for brick in self.map.obj_list:
-            if self.collider.colliderect(brick.image.get_rect()):
-                self.map.del_brick()
+            if self.collider.colliderect(pygame.rect.Rect(brick.fencing[0], brick.fencing[1], 100, 100)):
+                self.map.del_brick(brick)
 
         if self.X > Screen.WIDTH or self.X < -300 or self.Y > Screen.HEIGHT or self.Y < -300:
             self.is_shooted = False

@@ -7,9 +7,14 @@ HEIGHT = 720
 class Map:
     def __init__(self):
         self.obj_list = []
-        self.obj_list.append(Brick(0, 0))
+        x, y = 0, 0
+        for i in range(10):
+            x = 100 * i
+            self.obj_list.append(Brick(x, y))
 
-    def del_brick(self):
-        self.obj_list = []
+
+    def del_brick(self, brick):
+        brick.destroy()
+        self.obj_list.remove(brick)
 
 
