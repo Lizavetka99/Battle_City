@@ -3,10 +3,10 @@ import Screen
 
 
 CORRECT_SDVIG = {
-    "Up" : [-78, -150],
-    "Down" : [-78, 0],
-    "Left" : [-150, -80],
-    "Right" : [0, -80],
+    "Up" : [35, -30],
+    "Down" : [35, 70],
+    "Left" : [-30, 35],
+    "Right" : [100, 35],
 }
 
 MOVEMENT = {
@@ -24,8 +24,9 @@ textures = {
 }
 
 class Bullet:
-    def __init__(self, player):
+    def __init__(self, player, map):
         self.X, self.Y = 0, 0
+        self.map = map
         self.player = player
         self.is_shooted = False
 
@@ -34,9 +35,16 @@ class Bullet:
         self.X, self.Y = (self.player.pos_x + CORRECT_SDVIG[self.direction][0], self.player.pos_y + CORRECT_SDVIG[self.direction][1])
         self.is_shooted = True
         self.texture = pygame.image.load(textures[self.direction])
+        self.texture = pygame.transform.scale(self.texture, (32, 32))
+        self.collider = pygame.rect.Rect(self.X, self.Y, 32, 32)
+
     def Move(self):
         self.X += MOVEMENT[self.direction][0]
         self.Y += MOVEMENT[self.direction][1]
+
+        for brick in self.map.obj_list:
+            if self.collider.colliderect(brick.image.get_rect()):
+                self.map.del_brick()
 
         if self.X > Screen.WIDTH or self.X < -300 or self.Y > Screen.HEIGHT or self.Y < -300:
             self.is_shooted = False

@@ -9,7 +9,7 @@ pygame.init()
 # CLASS OBJECTS
 screen = Screen.Screen()
 player = Player.Player(100, 100, 0.1)
-bullet = Bullet.Bullet(player)
+bullet = Bullet.Bullet(player, screen.map)
 
 # SETTINGS
 pygame.display.set_caption("Battle City")
