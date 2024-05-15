@@ -3,8 +3,8 @@ import Player
 import pygame
 
 # SCREEN SETTINGS
-WIDTH = 1024
-HEIGHT = 720
+WIDTH = 800
+HEIGHT = 800
 BACKGROUND = "assets/background_test.jpg"
 
 

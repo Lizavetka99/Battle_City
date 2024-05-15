@@ -1,16 +1,26 @@
 from Brick import Brick
 
-WIDTH = 1024
-HEIGHT = 720
+WIDTH = 800
+HEIGHT = 800
 
 
 class Map:
     def __init__(self):
         self.obj_list = []
         x, y = 0, 0
-        for i in range(10):
-            x = 100 * i
+        for i in range(16):
+            x = 50 * i
             self.obj_list.append(Brick(x, y))
+        for i in range(1, 16):
+            y = 50*i
+            self.obj_list.append(Brick(x, y))
+        for i in range(15, -1, -1):
+            x = 50*i
+            self.obj_list.append(Brick(x, y))
+        for i in range(15, 0, -1):
+            y = 50*i
+            self.obj_list.append(Brick(x, y))
+
 
 
     def del_brick(self, brick):

@@ -21,6 +21,8 @@ while running:
     pygame.display.update()
     screen.update_screen(screen.map.obj_list, player)
     player.move()
+    if bullet.isCollision:
+        bullet.Freeze_bullet()
     if pygame.key.get_pressed()[pygame.K_SPACE] and (not bullet.is_shooted):
         bullet.setPosition()
         screen.screen.blit(bullet.texture, (bullet.X, bullet.Y))

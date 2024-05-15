@@ -29,24 +29,29 @@ class Bullet:
         self.map = map
         self.player = player
         self.is_shooted = False
+        self.isCollision = False
 
     def setPosition(self):
         self.direction = self.player.direction
         self.X, self.Y = (self.player.pos_x + CORRECT_SDVIG[self.direction][0], self.player.pos_y + CORRECT_SDVIG[self.direction][1])
         self.is_shooted = True
         self.texture = pygame.image.load(textures[self.direction])
-        self.texture = pygame.transform.scale(self.texture, (32, 32))
-        self.collider = pygame.rect.Rect(self.X, self.Y, 32, 32)
+        self.texture = pygame.transform.scale(self.texture, (16, 16))
+        self.collider = pygame.rect.Rect(self.X, self.Y, 16, 16)
 
     def Move(self):
-        self.collider = pygame.rect.Rect(self.X, self.Y, 32, 32)
+        self.collider = pygame.rect.Rect(self.X, self.Y, 16, 16)
         self.X += MOVEMENT[self.direction][0]
         self.Y += MOVEMENT[self.direction][1]
 
         for brick in self.map.obj_list:
             if self.collider.colliderect(pygame.rect.Rect(brick.fencing[0], brick.fencing[1], 100, 100)):
                 self.map.del_brick(brick)
+                self.isCollision = True
 
         if self.X > Screen.WIDTH or self.X < -300 or self.Y > Screen.HEIGHT or self.Y < -300:
             self.is_shooted = False
 
+    def Freeze_bullet(self):
+        self.X, self.Y = -1000, -1000
+        self.isCollision = False
