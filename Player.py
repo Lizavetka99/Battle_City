@@ -20,6 +20,7 @@ for pressed_key in player_anim.keys():
 class Player:
     def __init__(self, pos_x, pos_y, speed):
         self.pos_x = pos_x
+        self.direction = "Up"
         self.pos_y = pos_y
         self.speed = speed
         self.player_texture = player_anim[pygame.K_w][0]
@@ -28,18 +29,22 @@ class Player:
     def move(self):
         pressed_key = pygame.key.get_pressed()
         if pressed_key[pygame.K_w]:
+            self.direction = "Up"
             self.pos_y -= self.speed
             self.player_texture = player_anim[pygame.K_w][
                 self.player_anim_count]
         elif pressed_key[pygame.K_s]:
+            self.direction = "Down"
             self.pos_y += self.speed
             self.player_texture = player_anim[pygame.K_s][
                 self.player_anim_count]
         elif pressed_key[pygame.K_a]:
+            self.direction = "Left"
             self.pos_x -= self.speed
             self.player_texture = player_anim[pygame.K_a][
                 self.player_anim_count]
         elif pressed_key[pygame.K_d]:
+            self.direction = "Right"
             self.pos_x += self.speed
             self.player_texture = player_anim[pygame.K_d][
                 self.player_anim_count]

@@ -1,5 +1,6 @@
 import Player
 import Screen
+import Bullet
 import pygame
 from Map import Map
 
@@ -8,6 +9,7 @@ pygame.init()
 # CLASS OBJECTS
 screen = Screen.Screen()
 player = Player.Player(100, 100, 0.1)
+bullet = Bullet.Bullet(player)
 
 # SETTINGS
 pygame.display.set_caption("Battle City")
@@ -19,6 +21,13 @@ while running:
     pygame.display.update()
     screen.update_screen(screen.map.obj_list, player)
     player.move()
+    if pygame.key.get_pressed()[pygame.K_SPACE]:
+        bullet.setPosition()
+        screen.screen.blit(bullet.texture, (bullet.X, bullet.Y))
+    if bullet.is_shooted:
+        bullet.Move()
+        screen.screen.blit(bullet.texture, (bullet.X, bullet.Y))
+
     if pygame.key.get_pressed()[pygame.K_q]:
         screen.map.del_brick()
 
