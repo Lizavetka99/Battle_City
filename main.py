@@ -8,7 +8,7 @@ pygame.init()
 
 # CLASS OBJECTS
 screen = Screen.Screen()
-player = Player.Player(50, 50, 1)
+player = Player.Player(50, 50, 1, screen.map)
 bullet = Bullet.Bullet(player, screen.map)
 
 # SETTINGS

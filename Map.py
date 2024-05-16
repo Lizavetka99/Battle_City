@@ -7,7 +7,7 @@ HEIGHT = 800
 class Map:
     def __init__(self):
         self.obj_list = []
-        r = 50
+        r = Brick.size
         for i in range(16):
             self.obj_list.append(Brick(0, r * i))
             self.obj_list.append(Brick(15 * r, r * i))

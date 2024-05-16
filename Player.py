@@ -14,11 +14,11 @@ player_anim = {
 for pressed_key in player_anim.keys():
     for i in range(len(player_anim[pressed_key])):
         player_anim[pressed_key][i] = \
-            pygame.transform.scale(player_anim[pressed_key][i], (60, 60))
+            pygame.transform.scale(player_anim[pressed_key][i], (50, 50))
 
 
 class Player:
-    def __init__(self, pos_x, pos_y, speed):
+    def __init__(self, pos_x, pos_y, speed, map):
         self.pos_x = pos_x
         self.direction = "Up"
         self.pos_y = pos_y
@@ -26,27 +26,61 @@ class Player:
         self.player_texture = player_anim[pygame.K_w][0]
         self.player_anim_count = 0
 
+        self.map = map
+        self.is_stop = False
+
     def move(self):
+        self.is_stop = False
+        self.collider = pygame.rect.Rect(self.pos_x, self.pos_y, 50, 50)
         pressed_key = pygame.key.get_pressed()
         if pressed_key[pygame.K_w]:
-            self.direction = "Up"
-            self.pos_y -= self.speed
-            self.player_texture = player_anim[pygame.K_w][
-                self.player_anim_count]
+            for brick in self.map.obj_list:
+                if self.collider.colliderect(brick.collider):
+                    self.is_stop = True
+                    break
+                else:
+                    self.is_stop = False
+            if not self.is_stop:
+                self.direction = "Up"
+                self.pos_y -= self.speed
+                self.player_texture = player_anim[pygame.K_w][
+                    self.player_anim_count]
+
         elif pressed_key[pygame.K_s]:
-            self.direction = "Down"
-            self.pos_y += self.speed
-            self.player_texture = player_anim[pygame.K_s][
-                self.player_anim_count]
+            if pressed_key[pygame.K_w]:
+                for brick in self.map.obj_list:
+                    if self.collider.colliderect(brick.collider):
+                        self.is_stop = True
+                        break
+                    else: self.is_stop = False
+            if not self.is_stop:
+                self.direction = "Down"
+                self.pos_y += self.speed
+                self.player_texture = player_anim[pygame.K_s][
+                    self.player_anim_count]
         elif pressed_key[pygame.K_a]:
-            self.direction = "Left"
-            self.pos_x -= self.speed
-            self.player_texture = player_anim[pygame.K_a][
-                self.player_anim_count]
+            if pressed_key[pygame.K_w]:
+                for brick in self.map.obj_list:
+                    if self.collider.colliderect(brick.collider):
+                        self.is_stop = True
+                        break
+                    else: self.is_stop = False
+            if not self.is_stop:
+                self.direction = "Left"
+                self.pos_x -= self.speed
+                self.player_texture = player_anim[pygame.K_a][
+                    self.player_anim_count]
         elif pressed_key[pygame.K_d]:
-            self.direction = "Right"
-            self.pos_x += self.speed
-            self.player_texture = player_anim[pygame.K_d][
-                self.player_anim_count]
+            if pressed_key[pygame.K_w]:
+                for brick in self.map.obj_list:
+                    if self.collider.colliderect(brick.collider):
+                        self.is_stop = True
+                        break
+                    else: self.is_stop = False
+            if not self.is_stop:
+                self.direction = "Right"
+                self.pos_x += self.speed
+                self.player_texture = player_anim[pygame.K_d][
+                    self.player_anim_count]
 
         self.player_anim_count = (self.player_anim_count + 1) % 2
