@@ -12,7 +12,7 @@ class Screen:
     def __init__(self):
 
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
-        self.background = pygame.image.load("assets/background_test.jpg")
+        self.background = pygame.image.load("assets/bg_one_tone.jpg")
         self.background = pygame.transform.\
             scale(self.background, (WIDTH, HEIGHT))
         self.map = Map()

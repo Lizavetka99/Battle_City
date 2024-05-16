@@ -14,7 +14,7 @@ player_anim = {
 for pressed_key in player_anim.keys():
     for i in range(len(player_anim[pressed_key])):
         player_anim[pressed_key][i] = \
-            pygame.transform.scale(player_anim[pressed_key][i], (100, 100))
+            pygame.transform.scale(player_anim[pressed_key][i], (60, 60))
 
 
 class Player:
