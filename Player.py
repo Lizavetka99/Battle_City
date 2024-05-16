@@ -17,10 +17,10 @@ player_anim = {
                  pygame.image.load("assets/player_tank/Player_tank_2_a.png")]
 }
 
-for pressed_key in player_anim.keys():
-    for i in range(len(player_anim[pressed_key])):
-        player_anim[pressed_key][i] = \
-            pygame.transform.scale(player_anim[pressed_key][i], (44, 44))
+for image in player_anim.keys():
+    for i in range(len(player_anim[image])):
+        player_anim[image][i] = \
+            pygame.transform.scale(player_anim[image][i], (44, 44))
 
 
 class Player:
@@ -33,6 +33,8 @@ class Player:
         self.player_anim_count = 0
         self.size = 44
         self.map = map
+        self.collider = pygame.rect.Rect(self.pos_x, self.pos_y, 40, 40)
+
 
     def move(self):
         pressed_key = pygame.key.get_pressed()
@@ -61,8 +63,12 @@ class Player:
 
     def can_move(self):
         dx,dy = MOVEMENT[self.direction]
-        collider = pygame.rect.Rect(self.pos_x + dx, self.pos_y + dy, 40, 40)
+        self.collider = pygame.rect.Rect(self.pos_x + dx, self.pos_y + dy, 40, 40)
         for brick in self.map.obj_list:
-            if collider.colliderect(brick.collider):
+            if self.collider.colliderect(brick.collider):
+                return False
+        for player in self.map.players:
+            if player == self: continue
+            if self.collider.colliderect(player.collider):
                 return False
         return True

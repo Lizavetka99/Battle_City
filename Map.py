@@ -7,9 +7,13 @@ HEIGHT = 800
 class Map:
     def __init__(self, numb):
         self.obj_list = []
+        self.players = []
         if numb == 1:
             self.__level1__()
         else: self.level_test()
+
+    def add_player(self, player):
+        self.players.append(player)
 
 
     def del_brick(self, brick):

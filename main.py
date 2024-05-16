@@ -4,15 +4,16 @@ import Screen
 import Bullet
 import pygame
 import Enemy
-from Map import Map
 
 pygame.init()
 
 # CLASS OBJECTS
 screen = Screen.Screen()
-player = Player.Player(50, 50, 1, screen.map)
+player = Player.Player(50 * 7, 50 * 13, 1, screen.map)
 bullet = Bullet.Bullet(player, screen.map)
-enemy = Enemy.Enemy(100, 50, 1, screen.map)
+enemy = Enemy.Enemy(50 * 8, 50 * 2, 1, screen.map)
+screen.map.add_player(player)
+screen.map.add_player(enemy)
 
 # SETTINGS
 pygame.display.set_caption("Battle City")

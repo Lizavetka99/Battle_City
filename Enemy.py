@@ -36,6 +36,8 @@ class Enemy:
         self.enemy_anim_count = 0
         self.size = 44
         self.map = map
+        self.collider = pygame.rect.Rect(self.pos_x, self.pos_y, 40, 40)
+
 
     def move(self):
 
@@ -51,8 +53,12 @@ class Enemy:
 
     def can_move(self):
         dx, dy = MOVEMENT[self.direction]
-        collider = pygame.rect.Rect(self.pos_x + dx, self.pos_y + dy, 40, 40)
+        self.collider = pygame.rect.Rect(self.pos_x + dx, self.pos_y + dy, 40, 40)
         for brick in self.map.obj_list:
-            if collider.colliderect(brick.collider):
+            if self.collider.colliderect(brick.collider):
+                return False
+        for player in self.map.players:
+            if player == self: continue
+            if self.collider.colliderect(player.collider):
                 return False
         return True
