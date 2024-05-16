@@ -1,14 +1,6 @@
 import pygame
 import Screen
 
-
-CORRECT_SDVIG = {
-    "Up" : [35, -30],
-    "Down" : [35, 70],
-    "Left" : [-30, 35],
-    "Right" : [100, 35],
-}
-
 MOVEMENT = {
     "Up" : [0, -1],
     "Down" : [0, 1],
@@ -31,9 +23,16 @@ class Bullet:
         self.is_shooted = False
         self.isCollision = False
 
+
     def setPosition(self):
+        self.CORRECT_SDVIG = {
+            "Up": [self.player.pos_x + (self.player.size / 2) - 8, self.player.pos_y - 16],
+            "Down": [self.player.pos_x + (self.player.size / 2) - 8, self.player.pos_y + self.player.size],
+            "Left": [self.player.pos_x - 16, self.player.pos_y + (self.player.size / 2) - 8],
+            "Right": [self.player.pos_x + self.player.size, self.player.pos_y + (self.player.size / 2) - 8],
+        }
         self.direction = self.player.direction
-        self.X, self.Y = (self.player.pos_x + CORRECT_SDVIG[self.direction][0], self.player.pos_y + CORRECT_SDVIG[self.direction][1])
+        self.X, self.Y = (self.CORRECT_SDVIG[self.direction][0], self.CORRECT_SDVIG[self.direction][1])
         self.is_shooted = True
         self.texture = pygame.image.load(textures[self.direction])
         self.texture = pygame.transform.scale(self.texture, (16, 16))

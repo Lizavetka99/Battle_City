@@ -20,7 +20,7 @@ player_anim = {
 for pressed_key in player_anim.keys():
     for i in range(len(player_anim[pressed_key])):
         player_anim[pressed_key][i] = \
-            pygame.transform.scale(player_anim[pressed_key][i], (43, 43))
+            pygame.transform.scale(player_anim[pressed_key][i], (44, 44))
 
 
 class Player:
@@ -31,9 +31,8 @@ class Player:
         self.speed = speed
         self.player_texture = player_anim[pygame.K_w][0]
         self.player_anim_count = 0
-
+        self.size = 44
         self.map = map
-        self.is_stop = False
 
     def move(self):
         pressed_key = pygame.key.get_pressed()
