@@ -1,20 +1,29 @@
 from Brick import Brick
-
+from Base import Base
+import pygame
 WIDTH = 800
 HEIGHT = 800
-
 
 class Map:
     def __init__(self, numb):
         self.obj_list = []
         self.players = []
+        self.base = []
         if numb == 1:
             self.__level1__()
         else: self.level_test()
 
+
     def add_player(self, player):
         self.players.append(player)
 
+    def add_base(self, p_base):
+        self.base.append(p_base)
+
+    def finished(self, base):
+        if base.fencing == (50 * 7, 50 * 14):
+            return True
+        return False
 
     def del_brick(self, brick):
         brick.destroy()

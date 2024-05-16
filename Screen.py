@@ -20,6 +20,7 @@ class Screen:
 
     def update_screen(self, obj_list, player: Player.Player, enemy: Enemy.Enemy):
         """
+        :param enemy:
         :param obj_list:
         :type player: Player.Player
         """

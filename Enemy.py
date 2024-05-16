@@ -1,6 +1,5 @@
 import pygame
 import random
-import time
 
 MOVEMENT = {
     "Up" : [0, -1],
