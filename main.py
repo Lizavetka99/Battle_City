@@ -1,7 +1,9 @@
+import Enemy
 import Player
 import Screen
 import Bullet
 import pygame
+import Enemy
 from Map import Map
 
 pygame.init()
@@ -10,17 +12,20 @@ pygame.init()
 screen = Screen.Screen()
 player = Player.Player(50, 50, 1, screen.map)
 bullet = Bullet.Bullet(player, screen.map)
+enemy = Enemy.Enemy(100, 50, 1, screen.map)
 
 # SETTINGS
 pygame.display.set_caption("Battle City")
 icon = pygame.image.load("assets/game_icon.jpg")
 pygame.display.set_icon(icon)
 running = True
-
+count = 0
 while running:
+    count += 1
     pygame.display.update()
-    screen.update_screen(screen.map.obj_list, player)
+    screen.update_screen(screen.map.obj_list, player, enemy)
     player.move()
+    enemy.move()
     if bullet.isCollision:
         bullet.Freeze_bullet()
     if pygame.key.get_pressed()[pygame.K_SPACE] and (not bullet.is_shooted):

@@ -40,29 +40,29 @@ class Player:
             self.direction = "Up"
             self.player_texture = player_anim[pygame.K_w][
                 self.player_anim_count]
-            if can_move(self):self.pos_y -= self.speed
+            if self.can_move():self.pos_y -= self.speed
         elif pressed_key[pygame.K_s]:
             self.direction = "Down"
             self.player_texture = player_anim[pygame.K_s][
                 self.player_anim_count]
-            if can_move(self):self.pos_y += self.speed
+            if self.can_move():self.pos_y += self.speed
         elif pressed_key[pygame.K_a]:
             self.direction = "Left"
             self.player_texture = player_anim[pygame.K_a][
                 self.player_anim_count]
-            if can_move(self):self.pos_x -= self.speed
+            if self.can_move():self.pos_x -= self.speed
         elif pressed_key[pygame.K_d]:
             self.direction = "Right"
             self.player_texture = player_anim[pygame.K_d][
                 self.player_anim_count]
-            if can_move(self):self.pos_x += self.speed
+            if self.can_move():self.pos_x += self.speed
 
         self.player_anim_count = (self.player_anim_count + 1) % 2
 
-def can_move(self):
-    dx,dy = MOVEMENT[self.direction]
-    collider = pygame.rect.Rect(self.pos_x + dx, self.pos_y + dy, 40, 40)
-    for brick in self.map.obj_list:
-        if collider.colliderect(brick.collider):
-            return False
-    return True
+    def can_move(self):
+        dx,dy = MOVEMENT[self.direction]
+        collider = pygame.rect.Rect(self.pos_x + dx, self.pos_y + dy, 40, 40)
+        for brick in self.map.obj_list:
+            if collider.colliderect(brick.collider):
+                return False
+        return True
