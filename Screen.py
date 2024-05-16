@@ -15,7 +15,7 @@ class Screen:
         self.background = pygame.image.load("assets/bg_one_tone.jpg")
         self.background = pygame.transform.\
             scale(self.background, (WIDTH, HEIGHT))
-        self.map = Map()
+        self.map = Map(1)
 
     def update_screen(self, obj_list, player: Player.Player):
         """
