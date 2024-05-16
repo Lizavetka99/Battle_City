@@ -62,3 +62,5 @@ class Enemy:
             if self.collider.colliderect(player.collider):
                 return False
         return True
+    def destroy(self):
+        self.__init__(50 * 8, 50 * 2, 1, self.map)

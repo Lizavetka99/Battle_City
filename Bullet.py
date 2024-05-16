@@ -47,6 +47,12 @@ class Bullet:
             if self.collider.colliderect(brick.collider):
                 self.map.del_brick(brick)
                 self.isCollision = True
+        for player in self.map.players:
+            if player == self.player: continue
+            if self.collider.colliderect(player.collider):
+                self.map.del_player(player)
+                self.isCollision = True
+
 
         if self.X > Screen.WIDTH or self.X < -100 or self.Y > Screen.HEIGHT or self.Y < -100:
             self.is_shooted = False

@@ -20,6 +20,9 @@ class Map:
         brick.destroy()
         self.obj_list.remove(brick)
 
+    def del_player(self, player):
+        player.destroy()
+
     def level_test(self):
         r = Brick.size
         self.obj_list.append(Brick(r * 7, r * 7))

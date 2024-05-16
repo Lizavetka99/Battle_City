@@ -72,3 +72,6 @@ class Player:
             if self.collider.colliderect(player.collider):
                 return False
         return True
+
+    def destroy(self):
+        self.__init__(50 * 7, 50 * 13, 1, self.map)

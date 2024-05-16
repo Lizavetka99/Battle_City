@@ -26,7 +26,8 @@ while running:
     pygame.display.update()
     screen.update_screen(screen.map.obj_list, player, enemy)
     player.move()
-    enemy.move()
+    if screen.map.players.__contains__(enemy):
+        enemy.move()
     if bullet.isCollision:
         bullet.Freeze_bullet()
     if pygame.key.get_pressed()[pygame.K_SPACE] and (not bullet.is_shooted):
