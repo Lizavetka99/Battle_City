@@ -1,6 +1,9 @@
 from Brick import Brick
 from Base import Base
 import pygame
+
+from Strong_wall import Strong_wall
+
 WIDTH = 800
 HEIGHT = 800
 
@@ -20,14 +23,16 @@ class Map:
     def add_base(self, p_base):
         self.base.append(p_base)
 
-    def finished(self, base):
-        if base.fencing == (50 * 7, 50 * 14):
+#если база противника убита то выиграл
+    def win(self, base):
+        if base.fencing == (50 * 7, 50 * 1):
             return True
         return False
 
-    def del_brick(self, brick):
-        brick.destroy()
-        self.obj_list.remove(brick)
+    def del_fencing(self, fencing):
+        if fencing.type != "strong_wall":
+            fencing.destroy()
+            self.obj_list.remove(fencing)
 
     def del_player(self, player):
         player.destroy()
@@ -39,16 +44,16 @@ class Map:
     def __level1__(self):
         r = Brick.size
         for i in range(16):
-            self.obj_list.append(Brick(0, r * i))
-            self.obj_list.append(Brick(15 * r, r * i))
+            self.obj_list.append(Strong_wall(0, r * i))
+            self.obj_list.append(Strong_wall(15 * r, r * i))
         for i in range(1, 15):
-            self.obj_list.append(Brick(i * r, 0))
-            self.obj_list.append(Brick(i * r, 15 * r))
+            self.obj_list.append(Strong_wall(i * r, 0))
+            self.obj_list.append(Strong_wall(i * r, 15 * r))
 
         # боковые выступы
         for j in range(7, 9):
-            self.obj_list.append(Brick(1 * r, r * j))
-            self.obj_list.append(Brick(14 * r, r * j))
+            self.obj_list.append(Strong_wall(1 * r, r * j))
+            self.obj_list.append(Strong_wall(14 * r, r * j))
 
         for j in {2, 4, 6}:
             # самый левый/правый столбик

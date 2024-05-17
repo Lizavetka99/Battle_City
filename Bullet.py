@@ -43,9 +43,9 @@ class Bullet:
         self.X += MOVEMENT[self.direction][0]
         self.Y += MOVEMENT[self.direction][1]
 
-        for brick in self.map.obj_list:
-            if self.collider.colliderect(brick.collider):
-                self.map.del_brick(brick)
+        for fencing in self.map.obj_list:
+            if self.collider.colliderect(fencing.collider):
+                self.map.del_fencing(fencing)
                 self.isCollision = True
         for player in self.map.players:
             if player == self.player: continue

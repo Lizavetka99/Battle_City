@@ -64,8 +64,8 @@ class Player:
     def can_move(self):
         dx,dy = MOVEMENT[self.direction]
         self.collider = pygame.rect.Rect(self.pos_x + dx, self.pos_y + dy, 40, 40)
-        for brick in self.map.obj_list:
-            if self.collider.colliderect(brick.collider):
+        for fencing in self.map.obj_list:
+            if self.collider.colliderect(fencing.collider):
                 return False
         for player in self.map.players:
             if player == self: continue

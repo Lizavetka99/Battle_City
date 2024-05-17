@@ -6,10 +6,9 @@ brick_wall = pygame.transform.scale(brick_wall_row, (50, 50))
 class Brick(Fencing):
     size = 50
     def __init__(self,  pos_x, pos_y):
-        self.fencing = (pos_x, pos_y)
+        self.x = pos_x
+        self.y = pos_y
+        self.type = "brick"
         self.image = brick_wall
-        self.collider = pygame.rect.Rect(self.fencing[0], self.fencing[1], 50, 50)
-
-    def destroy(self):
-        del self
+        self.collider = pygame.rect.Rect(self.x, self.y, 50, 50)
 

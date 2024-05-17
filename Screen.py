@@ -6,14 +6,14 @@ import pygame
 # SCREEN SETTINGS
 WIDTH = 800
 HEIGHT = 800
-BACKGROUND = "assets/background_test.jpg"
+BACKGROUND = "assets/bg_one_tone.jpg"
 
 
 class Screen:
     def __init__(self):
 
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
-        self.background = pygame.image.load("assets/bg_one_tone.jpg")
+        self.background = pygame.image.load(BACKGROUND)
         self.background = pygame.transform.\
             scale(self.background, (WIDTH, HEIGHT))
         self.map = Map(1)
@@ -28,7 +28,7 @@ class Screen:
         self.screen.blit(player.player_texture, (player.pos_x, player.pos_y))
         self.screen.blit(enemy.enemy_texture, (enemy.pos_x, enemy.pos_y))
         for obj in obj_list:
-            self.screen.blit(obj.image, (obj.fencing))
+            self.screen.blit(obj.image, (obj.x, obj.y))
 
     def __get_map__(self):
         return self.map
