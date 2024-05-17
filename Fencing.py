@@ -5,6 +5,7 @@ class Fencing:
         self.y = pos_y
         self.type = type
 
+
     def destroy(self):
         self.life = False
         del self

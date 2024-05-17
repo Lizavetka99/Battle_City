@@ -34,8 +34,15 @@ class Map:
 
     def del_fencing(self, fencing):
         if fencing.type != "strong_wall":
-            fencing.destroy()
-            self.obj_list.remove(fencing)
+            fencing.lifes -= 1
+            if fencing.lifes == 0:
+                fencing.destroy()
+                self.obj_list.remove(fencing)
+            elif fencing.type == "brick":
+                fencing.image = pygame.image.load(f"assets/brick_wall_{fencing.lifes}.png")
+                fencing.image = pygame.transform.scale(fencing.image, (50, 50))
+
+
 
     def del_player(self, player):
         player.destroy()
