@@ -46,8 +46,10 @@ icon = pygame.image.load("assets/game_icon.jpg")
 pygame.display.set_icon(icon)
 running = True
 enemies = [enemy, enemy_base_attack]
+attack_delay = 0
 
 while running:
+    attack_delay += 1
     pygame.display.update()
     screen.update_screen(screen.map.obj_list, player, enemies)
     player.move()
@@ -59,7 +61,10 @@ while running:
     if bullet.isCollision:
         bullet.Freeze_bullet()
     if pygame.key.get_pressed()[pygame.K_SPACE] and (not bullet.is_shooted):
-        bullet.setPosition()
+        if (attack_delay > 100):
+            bullet.setPosition()
+
+            attack_delay = 0
         screen.screen.blit(bullet.texture, (bullet.X, bullet.Y))
     if bullet.is_shooted:
         bullet.Move()
