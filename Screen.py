@@ -18,7 +18,7 @@ class Screen:
             scale(self.background, (WIDTH, HEIGHT))
         self.map = Map(1)
 
-    def update_screen(self, obj_list, player: Player.Player, enemy: Enemy.Enemy):
+    def update_screen(self, obj_list, player: Player.Player, enemies: [Enemy.Enemy]):
         """
         :param enemy:
         :param obj_list:
@@ -26,7 +26,8 @@ class Screen:
         """
         self.screen.blit(self.background, (0, 0))
         self.screen.blit(player.player_texture, (player.pos_x, player.pos_y))
-        self.screen.blit(enemy.enemy_texture, (enemy.pos_x, enemy.pos_y))
+        for enemy in enemies:
+            self.screen.blit(enemy.enemy_texture, (enemy.pos_x, enemy.pos_y))
         for obj in obj_list:
             self.screen.blit(obj.image, (obj.x, obj.y))
 

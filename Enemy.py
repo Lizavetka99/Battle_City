@@ -2,10 +2,10 @@ import pygame
 import random
 
 MOVEMENT = {
-    "Up" : [0, -1],
-    "Down" : [0,1],
-    "Left" : [-1, 0],
-    "Right" : [1, 0]
+    "Up" : [0, -0.5],
+    "Down" : [0,0.5],
+    "Left" : [-0.5, 0],
+    "Right" : [0.5, 0]
 }
 DIRECTION = ["Up", "Down", "Left", "Right"]
 
@@ -26,7 +26,8 @@ for image in enemy_anim.keys():
         enemy_anim[image][i] = \
             pygame.transform.scale(enemy_anim[image][i], (44, 44))
 class Enemy:
-    def __init__(self, pos_x, pos_y, speed, map):
+    def __init__(self, pos_x, pos_y, speed, map, type):
+        self.type = type
         self.bullet = None
         self.pos_x = pos_x
         self.direction = "Down"
@@ -36,14 +37,20 @@ class Enemy:
         self.enemy_anim_count = 0
         self.size = 44
         self.map = map
+        self.attack_delay = 0
         self.collider = pygame.rect.Rect(self.pos_x, self.pos_y, 40, 40)
 
-
     def move(self):
-
+        if self.type == "usual":
+            start, end = 0, 3
+        else:
+            start, end = 1, 3
         if not self.bullet.is_shooted:
-            self.bullet.setPosition()
-            self.bullet.Move()
+            self.attack_delay += 1
+            if self.attack_delay == 200:
+                self.bullet.setPosition()
+                self.bullet.Move()
+            self.attack_delay %= 201
         if self.bullet.is_shooted:
             self.bullet.Move()
         if self.bullet.isCollision:
@@ -54,9 +61,12 @@ class Enemy:
             self.pos_x += MOVEMENT[self.direction][0]
             self.pos_y += MOVEMENT[self.direction][1]
         else:
-            self.direction = DIRECTION[random.randint(0, 3)]
+            self.get_random_direction(start, end)
 
         self.enemy_anim_count = (self.enemy_anim_count + 1) % 2
+
+    def get_random_direction(self, start, end):
+        self.direction = DIRECTION[random.randint(start, end)]
 
     def can_move(self):
         dx, dy = MOVEMENT[self.direction]
@@ -71,5 +81,5 @@ class Enemy:
         return True
     def destroy(self):
         bullet = self.bullet
-        self.__init__(50 * 8, 50 * 2, 1, self.map)
+        self.__init__(50 * 8, 50 * 2, 1, self.map, self.type)
         self.bullet = bullet
