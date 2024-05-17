@@ -41,10 +41,14 @@ class Enemy:
         self.collider = pygame.rect.Rect(self.pos_x, self.pos_y, 40, 40)
 
     def move(self):
+        speed = 1
         if self.type == "usual":
             start, end = 0, 3
-        else:
+        elif self.type == "attack":
             start, end = 1, 3
+        elif self.type == "speed":
+            start, end = 0, 3
+            speed = 2
         if not self.bullet.is_shooted:
             self.attack_delay += 1
             if self.attack_delay == 200:
@@ -58,8 +62,8 @@ class Enemy:
         self.enemy_texture = enemy_anim[self.direction][
             self.enemy_anim_count]
         if self.can_move():
-            self.pos_x += MOVEMENT[self.direction][0]
-            self.pos_y += MOVEMENT[self.direction][1]
+            self.pos_x += MOVEMENT[self.direction][0] * speed
+            self.pos_y += MOVEMENT[self.direction][1] * speed
         else:
             self.get_random_direction(start, end)
 

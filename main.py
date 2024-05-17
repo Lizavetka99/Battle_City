@@ -22,12 +22,14 @@ bullet = Bullet.Bullet(player, screen.map)
 enemy = Enemy.Enemy(50 * 8, 50 * 3, 1, screen.map, "usual")
 bullet_enemy = Bullet.Bullet(enemy, screen.map)
 enemy.bullet = bullet_enemy
-
+speed_enemy = Enemy.Enemy(50 * 12, 50 * 3, 1, screen.map, "speed")
+bullet_speed_enemy = Bullet.Bullet(speed_enemy, screen.map)
+speed_enemy.bullet = bullet_speed_enemy
 
 p_base = Base.Base(50 * 7, 50 * 13, player, p_image)
 e_base = Base.Base(50 * 7, 50 * 1, enemy, e_image)
 
-enemy_base_attack = Enemy.Enemy(50 * 10, 50 * 3, 1, screen.map, "attack")
+enemy_base_attack = Enemy.Enemy(50 * 5, 50, 1, screen.map, "attack")
 enemy_base_attack_bullet = Bullet.Bullet(enemy_base_attack, screen.map)
 enemy_base_attack.bullet = enemy_base_attack_bullet
 
@@ -39,13 +41,15 @@ screen.map.add_bullet(bullet)
 screen.map.add_bullet(bullet_enemy)
 screen.map.add_player(enemy_base_attack)
 screen.map.add_bullet(enemy_base_attack_bullet)
+screen.map.add_bullet(bullet_speed_enemy)
+screen.map.add_player(speed_enemy)
 
 # SETTINGS
 pygame.display.set_caption("Battle City")
 icon = pygame.image.load("assets/game_icon.jpg")
 pygame.display.set_icon(icon)
 running = True
-enemies = [enemy, enemy_base_attack]
+enemies = [enemy, enemy_base_attack, speed_enemy]
 attack_delay = 0
 
 while running:
