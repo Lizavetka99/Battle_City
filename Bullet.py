@@ -2,10 +2,10 @@ import pygame
 import Screen
 
 MOVEMENT = {
-    "Up" : [0, -1],
-    "Down" : [0, 1],
-    "Left" : [-1, 0],
-    "Right" : [1, 0]
+    "Up" : [0, -2],
+    "Down" : [0, 2],
+    "Left" : [-2, 0],
+    "Right" : [2, 0]
 }
 
 textures = {
@@ -19,9 +19,11 @@ class Bullet:
     def __init__(self, player, map):
         self.X, self.Y = 0, 0
         self.map = map
+        self.speed = 5
         self.player = player
         self.is_shooted = False
         self.isCollision = False
+        self.collider = pygame.rect.Rect(self.X, self.Y, 16, 16)
 
 
     def setPosition(self):
@@ -52,6 +54,11 @@ class Bullet:
             if self.collider.colliderect(player.collider):
                 self.map.del_player(player)
                 self.isCollision = True
+        for bullet in self.map.bullets:
+            if bullet == self: continue
+            if self.collider.colliderect(bullet.collider):
+                self.isCollision = True
+                bullet.isCollision = True
 
 
         if self.X > Screen.WIDTH or self.X < -100 or self.Y > Screen.HEIGHT or self.Y < -100:

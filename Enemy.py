@@ -27,6 +27,7 @@ for image in enemy_anim.keys():
             pygame.transform.scale(enemy_anim[image][i], (44, 44))
 class Enemy:
     def __init__(self, pos_x, pos_y, speed, map):
+        self.bullet = None
         self.pos_x = pos_x
         self.direction = "Down"
         self.pos_y = pos_y
@@ -40,6 +41,13 @@ class Enemy:
 
     def move(self):
 
+        if not self.bullet.is_shooted:
+            self.bullet.setPosition()
+            self.bullet.Move()
+        if self.bullet.is_shooted:
+            self.bullet.Move()
+        if self.bullet.isCollision:
+            self.bullet.Freeze_bullet()
         self.enemy_texture = enemy_anim[self.direction][
             self.enemy_anim_count]
         if self.can_move():
@@ -62,4 +70,6 @@ class Enemy:
                 return False
         return True
     def destroy(self):
+        bullet = self.bullet
         self.__init__(50 * 8, 50 * 2, 1, self.map)
+        self.bullet = bullet

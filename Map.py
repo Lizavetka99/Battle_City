@@ -11,6 +11,7 @@ class Map:
     def __init__(self, numb):
         self.obj_list = []
         self.players = []
+        self.bullets = []
         self.base = []
         if numb == 1:
             self.__level1__()
@@ -22,6 +23,8 @@ class Map:
 
     def add_base(self, p_base):
         self.base.append(p_base)
+    def add_bullet(self, bullet):
+        self.bullets.append(bullet)
 
 #если база противника убита то выиграл
     def win(self, base):

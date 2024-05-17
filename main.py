@@ -20,12 +20,16 @@ player = Player.Player(50 * 7, 50 * 12, 1, screen.map)
 bullet = Bullet.Bullet(player, screen.map)
 enemy = Enemy.Enemy(50 * 8, 50 * 3, 1, screen.map)
 bullet_enemy = Bullet.Bullet(enemy, screen.map)
+enemy.bullet = bullet_enemy
+
 p_base = Base.Base(50 * 7, 50 * 13, player, p_image)
 e_base = Base.Base(50 * 7, 50 * 1, enemy, e_image)
 screen.map.add_base(p_base)
 screen.map.add_base(e_base)
 screen.map.add_player(player)
 screen.map.add_player(enemy)
+screen.map.add_bullet(bullet)
+screen.map.add_bullet(bullet_enemy)
 
 # SETTINGS
 pygame.display.set_caption("Battle City")
@@ -49,6 +53,8 @@ while running:
     if bullet.is_shooted:
         bullet.Move()
         screen.screen.blit(bullet.texture, (bullet.X, bullet.Y))
+    if enemy.bullet.is_shooted:
+        screen.screen.blit(enemy.bullet.texture, (enemy.bullet.X, enemy.bullet.Y))
 
 
     for event in pygame.event.get():
