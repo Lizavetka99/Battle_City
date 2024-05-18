@@ -18,18 +18,26 @@ class Screen:
             scale(self.background, (WIDTH, HEIGHT))
         self.map = Map(1)
 
-    def update_screen(self, obj_list, player: Player.Player, enemies: [Enemy.Enemy]):
+    def update_screen(self, obj_list, player: Player.Player, enemies: [Enemy.Enemy], gift):
         """
         :param enemy:
         :param obj_list:
         :type player: Player.Player
         """
         self.screen.blit(self.background, (0, 0))
+        self.screen.blit(gift.image, (gift.x, gift.y))
         self.screen.blit(player.player_texture, (player.pos_x, player.pos_y))
         for enemy in enemies:
             self.screen.blit(enemy.enemy_texture, (enemy.pos_x, enemy.pos_y))
         for obj in obj_list:
             self.screen.blit(obj.image, (obj.x, obj.y))
+
+
+    def update_player_lives(self, lives_count, heart_texture):
+        pos_x, pos_y = 30, 30
+        for i in range(lives_count):
+            self.screen.blit(heart_texture, (pos_x, pos_y))
+            pos_x += 30
 
     def __get_map__(self):
         return self.map

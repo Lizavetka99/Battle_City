@@ -4,6 +4,7 @@ import Screen
 import Bullet
 import pygame
 import Enemy
+import Gift
 
 
 
@@ -20,8 +21,10 @@ e_image = pygame.transform.scale(e_image_row, (100, 100))
 
 # CLASS OBJECTS
 screen = Screen.Screen()
-player = Player.Player(50 * 7, 50 * 12, 1, screen.map)
+player = Player.Player(50 * 7, 50 * 12, 1, screen.map, 3)
 bullet = Bullet.Bullet(player, screen.map)
+player_life_texture = pygame.image.load("assets/Heart.png")
+player_life_texture = pygame.transform.scale(player_life_texture, (30, 30))
 
 enemy = Enemy.Enemy(50 * 8, 50 * 3, 1, screen.map, "usual")
 bullet_enemy = Bullet.Bullet(enemy, screen.map)
@@ -64,11 +67,19 @@ running = True
 enemies = [enemy, enemy_base_attack, speed_enemy, enemy_armor]
 attack_delay = 0
 pygame.mixer.music.play(loops=-1)
-
+gift = Gift.Gift(-100, -100)
 while running:
+    if Player.KILLS != 0 and Player.KILLS % 5 == 0 and gift.is_available == False:
+        gift.is_available = True
+        gift.x = Player.LAST_ENEMY_KILLED.pos_x
+        gift.y = Player.LAST_ENEMY_KILLED.pos_y
+    if gift.is_available == True:
+        if gift.check_collision_with_player(player):
+            gift.is_available = False
     attack_delay += 1
     pygame.display.update()
-    screen.update_screen(screen.map.obj_list, player, enemies)
+    screen.update_screen(screen.map.obj_list, player, enemies, gift)
+    screen.update_player_lives(player.life, player_life_texture)
     player.move()
     screen.screen.blit(p_base.image, (p_base.x, p_base.y))
     screen.screen.blit(e_base.image, (e_base.x, e_base.y))
@@ -97,3 +108,5 @@ while running:
         if event.type == pygame.QUIT:
             running = False
             pygame.quit()
+
+print(Player.KILLS)

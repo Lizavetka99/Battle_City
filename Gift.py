@@ -8,7 +8,16 @@ class Gift:
         self.x = pos_x
         self.y = pos_y
         self.image = image
-        self.collider = pygame.rect.Rect(self.x, self.y, 40, 40)
+        self.is_available = False
 
     def destroy(self):
         del self
+
+    def check_collision_with_player(self, player):
+        self.collider = pygame.rect.Rect(self.x, self.y, 40, 40)
+        if self.collider.colliderect(player.collider):
+            player.is_alive = True
+            self.x = -100
+            self.y = -100
+            return True
+        return False

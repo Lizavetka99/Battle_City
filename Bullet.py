@@ -53,7 +53,7 @@ class Bullet:
         for player in self.map.players:
             if player == self.player: continue
             if self.collider.colliderect(player.collider):
-                self.map.del_player(player)
+                self.map.del_player(player, self)
                 self.isCollision = True
         for bullet in self.map.bullets:
             if bullet == self: continue

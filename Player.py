@@ -2,6 +2,9 @@ import pygame
 
 import Gift
 
+KILLS = 0 # если 5 киллов - то неуязвимость
+LAST_ENEMY_KILLED = None
+
 MOVEMENT = {
     "Up" : [0, -1],
     "Down" : [0, 1],
@@ -26,8 +29,9 @@ for image in player_anim.keys():
 
 
 class Player:
-    def __init__(self, pos_x, pos_y, speed, map):
+    def __init__(self, pos_x, pos_y, speed, map, lives_count):
         self.pos_x = pos_x
+        self.is_alive = False
         self.direction = "Up"
         self.pos_y = pos_y
         self.speed = speed
@@ -36,7 +40,7 @@ class Player:
         self.size = 44
         self.map = map
         self.collider = pygame.rect.Rect(self.pos_x, self.pos_y, 40, 40)
-        self.life = 3
+        self.life = lives_count
         self.invincibility = False
 
 
@@ -80,4 +84,4 @@ class Player:
         return True
 
     def destroy(self):
-        self.__init__(50 * 7, 50 * 12, 1, self.map)
+        self.__init__(50 * 7, 50 * 12, 1, self.map, self.life)

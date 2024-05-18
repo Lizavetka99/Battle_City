@@ -47,12 +47,18 @@ class Map:
     def take_gift(self, gift):
         gift.destroy()
 
-    def del_player(self, player):
-        player.life -= 1
+    def del_player(self, player, bullet):
+
         if type(player) == Player.Player:
-            player.destroy()
+            if not player.is_alive:
+                player.life -= 1
+                player.destroy()
         else:
+            player.life -= 1
             if player.life == 0:
+                if type(bullet.player) == Player.Player:
+                    Player.KILLS += 1
+                    Player.LAST_ENEMY_KILLED = player
                 #pos_x = player.pos_x
                 #pos_y = player.pos_y
                 player.destroy()
