@@ -34,7 +34,8 @@ class Player:
         self.size = 44
         self.map = map
         self.collider = pygame.rect.Rect(self.pos_x, self.pos_y, 40, 40)
-        self.life = 1
+        self.life = 3
+
 
 
     def move(self):
@@ -75,4 +76,4 @@ class Player:
         return True
 
     def destroy(self):
-        self.__init__(50 * 7, 50 * 13, 1, self.map)
+        self.__init__(50 * 7, 50 * 12, 1, self.map)

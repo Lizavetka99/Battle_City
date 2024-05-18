@@ -1,3 +1,4 @@
+import Player
 from Brick import Brick
 from Base import Base
 import pygame
@@ -46,7 +47,10 @@ class Map:
 
     def del_player(self, player):
         player.life -= 1
-        if player.life == 0:player.destroy()
+        if type(player) == Player.Player:
+            player.destroy()
+        else:
+            if player.life == 0:player.destroy()
 
     def level_test(self):
         r = Brick.size
