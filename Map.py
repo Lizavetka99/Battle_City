@@ -45,7 +45,8 @@ class Map:
 
 
     def del_player(self, player):
-        player.destroy()
+        player.life -= 1
+        if player.life == 0:player.destroy()
 
     def level_test(self):
         r = Brick.size

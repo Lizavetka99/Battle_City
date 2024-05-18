@@ -39,6 +39,8 @@ class Enemy:
         self.map = map
         self.attack_delay = 0
         self.collider = pygame.rect.Rect(self.pos_x, self.pos_y, 40, 40)
+        if self.type == "armor": self.life = 2
+        else: self.life = 1
 
     def move(self):
         speed = 1
@@ -49,6 +51,8 @@ class Enemy:
         elif self.type == "speed":
             start, end = 0, 3
             speed = 2
+        elif self.type == "armor":
+            start, end = 1, 3
         if not self.bullet.is_shooted:
             self.attack_delay += 1
             if self.attack_delay == 200:
@@ -85,5 +89,12 @@ class Enemy:
         return True
     def destroy(self):
         bullet = self.bullet
-        self.__init__(50 * 8, 50 * 2, 1, self.map, self.type)
+        if self.type == "usual":
+            self.__init__(50 * 8, 50 * 3, 1, self.map, self.type)
+        elif self.type == "attack":
+            self.__init__(50 * 9, 50 * 1, 1, self.map, self.type)
+        elif self.type == "speed":
+            self.__init__(50 * 6, 50 * 1, 1, self.map, self.type)
+        else:
+            self.__init__(50 * 7, 50 * 3, 1, self.map, self.type)
         self.bullet = bullet

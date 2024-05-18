@@ -34,6 +34,7 @@ class Player:
         self.size = 44
         self.map = map
         self.collider = pygame.rect.Rect(self.pos_x, self.pos_y, 40, 40)
+        self.life = 1
 
 
     def move(self):
