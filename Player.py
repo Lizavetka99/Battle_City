@@ -3,7 +3,7 @@ import pygame
 import Gift
 
 KILLS = 0 # если 5 киллов - то неуязвимость
-LAST_ENEMY_KILLED = None
+LAST_ENEMY_KILLED_COORDS = None
 
 MOVEMENT = {
     "Up" : [0, -1],

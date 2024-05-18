@@ -58,7 +58,7 @@ class Map:
             if player.life == 0:
                 if type(bullet.player) == Player.Player:
                     Player.KILLS += 1
-                    Player.LAST_ENEMY_KILLED = player
+                    Player.LAST_ENEMY_KILLED_COORDS = (player.pos_x, player.pos_y)
                 #pos_x = player.pos_x
                 #pos_y = player.pos_y
                 player.destroy()

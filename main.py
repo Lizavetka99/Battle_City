@@ -69,13 +69,13 @@ attack_delay = 0
 pygame.mixer.music.play(loops=-1)
 gift = Gift.Gift(-100, -100)
 while running:
-    if Player.KILLS != 0 and Player.KILLS % 5 == 0 and gift.is_available == False:
-        gift.is_available = True
-        gift.x = Player.LAST_ENEMY_KILLED.pos_x
-        gift.y = Player.LAST_ENEMY_KILLED.pos_y
+    #GIFT#
+    if Player.KILLS != 0 and Player.KILLS == 5 and gift.is_available == False:
+        gift.spawn()
     if gift.is_available == True:
-        if gift.check_collision_with_player(player):
-            gift.is_available = False
+        gift.check_collision_with_player(player)
+    #####
+
     attack_delay += 1
     pygame.display.update()
     screen.update_screen(screen.map.obj_list, player, enemies, gift)
