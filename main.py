@@ -10,7 +10,7 @@ import Enemy
 pygame.init()
 pygame.mixer.init()
 
-pygame.mixer.music.load("assets/anna-asti-po-baram.mp3")
+pygame.mixer.music.load("assets/alblak-52-7-952-812-mp3.mp3")
 
 p_image_row = pygame.image.load("assets/base.jpg")
 e_image_row = pygame.image.load("assets/evil_base.jpg")
