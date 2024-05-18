@@ -1,5 +1,7 @@
 import pygame
 
+import Gift
+
 MOVEMENT = {
     "Up" : [0, -1],
     "Down" : [0, 1],
@@ -35,6 +37,7 @@ class Player:
         self.map = map
         self.collider = pygame.rect.Rect(self.pos_x, self.pos_y, 40, 40)
         self.life = 3
+        self.invincibility = False
 
 
 
@@ -67,6 +70,7 @@ class Player:
         dx,dy = MOVEMENT[self.direction]
         self.collider = pygame.rect.Rect(self.pos_x + dx, self.pos_y + dy, 40, 40)
         for fencing in self.map.obj_list:
+            #if type(fencing) == Gift.Gift: continue
             if self.collider.colliderect(fencing.collider):
                 return False
         for player in self.map.players:

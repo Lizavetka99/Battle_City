@@ -3,6 +3,7 @@ from Brick import Brick
 from Base import Base
 import pygame
 
+from Gift import Gift
 from Strong_wall import Strong_wall
 
 WIDTH = 800
@@ -43,14 +44,21 @@ class Map:
                 fencing.image = pygame.image.load(f"assets/brick_wall_{fencing.lifes}.png")
                 fencing.image = pygame.transform.scale(fencing.image, (50, 50))
 
-
+    def take_gift(self, gift):
+        gift.destroy()
 
     def del_player(self, player):
         player.life -= 1
         if type(player) == Player.Player:
             player.destroy()
         else:
-            if player.life == 0:player.destroy()
+            if player.life == 0:
+                #pos_x = player.pos_x
+                #pos_y = player.pos_y
+                player.destroy()
+                #self.obj_list.append(Gift(pos_x,pos_y))
+
+
 
     def level_test(self):
         r = Brick.size
