@@ -8,6 +8,9 @@ import Enemy
 
 
 pygame.init()
+pygame.mixer.init()
+
+pygame.mixer.music.load("assets/anna-asti-po-baram.mp3")
 
 p_image_row = pygame.image.load("assets/base.jpg")
 e_image_row = pygame.image.load("assets/evil_base.jpg")
@@ -60,6 +63,7 @@ pygame.display.set_icon(icon)
 running = True
 enemies = [enemy, enemy_base_attack, speed_enemy, enemy_armor]
 attack_delay = 0
+pygame.mixer.music.play(loops=-1)
 
 while running:
     attack_delay += 1
@@ -85,6 +89,8 @@ while running:
     for e in enemies:
         if e.bullet.is_shooted:
             screen.screen.blit(e.bullet.texture, (e.bullet.X, e.bullet.Y))
+    if not pygame.mixer.music.get_busy():
+        pygame.mixer.music.stop()
 
 
     for event in pygame.event.get():
