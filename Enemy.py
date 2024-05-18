@@ -86,19 +86,15 @@ class Enemy:
         self.attack_delay = 0
         self.collider = pygame.rect.Rect(self.pos_x, self.pos_y, 40, 40)
         if self.type == "armor":
-            print(1)
             self.life = 2
             self.enemy_texture = enemy_anim_armor["Down"][0]
         elif self.type == "speed":
-            print(2)
             self.life = 1
             self.enemy_texture = enemy_anim_speed["Down"][0]
         elif self.type == "attack":
-            print(3)
             self.life = 1
             self.enemy_texture = enemy_anim_attack["Down"][0]
         else:
-            print(4)
             self.life = 1
             self.enemy_texture = enemy_anim["Down"][0]
 
