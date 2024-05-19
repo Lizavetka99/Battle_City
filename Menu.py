@@ -46,7 +46,7 @@ class Menu:
                 return True
             elif quit_button:
                 running = False
-                return False
+                pygame.quit()
 
     def create_button(self, text, x, y, width, height, inactive_color, active_color):
         mouse = pygame.mouse.get_pos()
