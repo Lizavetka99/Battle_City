@@ -24,7 +24,9 @@ class Map:
     def add_player(self, player):
         self.players.append(player)
 
+
     def add_base(self, p_base):
+        self.obj_list.append(p_base)
         self.base.append(p_base)
     def add_bullet(self, bullet):
         self.bullets.append(bullet)

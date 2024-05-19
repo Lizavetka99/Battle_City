@@ -39,5 +39,15 @@ class Screen:
             self.screen.blit(heart_texture, (pos_x, pos_y))
             pos_x += 30
 
+    def update_bases_lives(self, p_base_lifes, e_base_lifes, p_heart, e_heart):
+        e_pos_x, e_pos_y = 340, 15
+        p_pos_x, p_pos_y = 340, 755
+        for i in range(e_base_lifes):
+            self.screen.blit(e_heart, (e_pos_x, e_pos_y))
+            e_pos_x += 30
+        for i in range(p_base_lifes):
+            self.screen.blit(p_heart, (p_pos_x, p_pos_y))
+            p_pos_x += 30
+
     def __get_map__(self):
         return self.map

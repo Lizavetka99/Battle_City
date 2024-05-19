@@ -1,5 +1,7 @@
 import pygame
+import Base
 import Screen
+import Player, Enemy
 
 MOVEMENT = {
     "Up" : [0, -2],
@@ -46,6 +48,11 @@ class Bullet:
         self.Y += MOVEMENT[self.direction][1]
 
         for fencing in self.map.obj_list:
+            if type(fencing) == Base.Base:
+                if fencing.type == "enemy" and type(self.player) == Enemy.Enemy:
+                    continue
+                if fencing.type == "player" and type(self.player) == Player.Player:
+                    continue
             if self.collider.colliderect(fencing.collider):
                 self.map.del_fencing(fencing)
                 self.isCollision = True

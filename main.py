@@ -10,7 +10,10 @@ import Score
 
 pygame.init()
 pygame.mixer.init()
-
+p_base_heart_texture = pygame.image.load("assets/player_base_heart.png")
+p_base_heart_texture = pygame.transform.scale(p_base_heart_texture, (30, 30))
+e_base_heart_texture = pygame.image.load("assets/enemy_base_heart.png")
+e_base_heart_texture = pygame.transform.scale(e_base_heart_texture, (30, 30))
 running = False
 def initialize_game():
     score = Score.Score()
@@ -53,8 +56,8 @@ def initialize_game():
     bullet_enemy_armor = Bullet.Bullet(enemy_armor, screen.map)
     enemy_armor.bullet = bullet_enemy_armor
 
-    p_base = Base.Base(50 * 7, 50 * 13, player, p_image)
-    e_base = Base.Base(50 * 7, 50 * 1, enemy, e_image)
+    p_base = Base.Base(50 * 7, 50 * 13, player, p_image, "player")
+    e_base = Base.Base(50 * 7, 50 * 1, enemy, e_image, "enemy")
 
     screen.map.add_base(p_base)
     screen.map.add_base(e_base)
@@ -86,6 +89,8 @@ while True:
         screen, player, bullet, player_life_texture, enemies, attack_delay, gift, p_base, e_base, score = initialize_game()
 
     while running:
+        if p_base.lifes == 0 or e_base.lifes == 0:
+            running = False
         if (player.life == 0):
             running = False
         if player.is_alive:
@@ -104,6 +109,7 @@ while True:
         pygame.display.update()
         screen.update_screen(screen.map.obj_list, player, enemies, gift)
         screen.update_player_lives(player.life, player_life_texture)
+        screen.update_bases_lives(p_base.lifes, e_base.lifes, p_base_heart_texture, e_base_heart_texture)
         player.move()
         screen.screen.blit(score.text_surface, (score.x, score.y))
         if score.check_time_to_show():
