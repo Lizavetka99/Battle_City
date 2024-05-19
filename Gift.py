@@ -23,6 +23,7 @@ class Gift:
         self.collider = pygame.rect.Rect(self.x, self.y, 40, 40)
         if self.collider.colliderect(player.collider):
             player.is_alive = True
+            player.is_alive_time = 0
             self.is_available = False
             self.x = -100
             self.y = -100

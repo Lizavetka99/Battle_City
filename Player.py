@@ -32,6 +32,7 @@ class Player:
     def __init__(self, pos_x, pos_y, speed, map, lives_count):
         self.pos_x = pos_x
         self.is_alive = False
+        self.is_alive_time = 0
         self.direction = "Up"
         self.pos_y = pos_y
         self.speed = speed

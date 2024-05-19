@@ -77,6 +77,11 @@ if menu.get_menu():
     running = True
 
 while running:
+    if player.is_alive:
+        print(1)
+        player.is_alive_time += 1
+        if player.is_alive_time == 1000:
+            player.is_alive = False
     #GIFT#
     if Player.KILLS != 0 and Player.KILLS == 5 and gift.is_available == False:
         gift.spawn()
