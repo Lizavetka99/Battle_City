@@ -6,16 +6,17 @@ import pygame
 import Enemy
 import Gift
 import Menu
-
+import Score
 
 pygame.init()
 pygame.mixer.init()
 
 running = False
 def initialize_game():
+    score = Score.Score()
     Player.KILLS = 0
     Player.LAST_ENEMY_KILLED_COORDS = None
-    screen = Screen.Screen()
+    screen = Screen.Screen(score)
     pygame.mixer.music.load("assets/alblak-52-7-952-812-mp3.mp3")
     pygame.display.set_caption("Battle City")
     icon = pygame.image.load("assets/game_icon.jpg")
@@ -75,14 +76,14 @@ def initialize_game():
     attack_delay = 0
     pygame.mixer.music.play(loops=-1)
     gift = Gift.Gift(-100, -100)
-    return screen, player, bullet, player_life_texture, enemies, attack_delay, gift, p_base, e_base
+    return screen, player, bullet, player_life_texture, enemies, attack_delay, gift, p_base, e_base, score
 
-screen, player, bullet, player_life_texture, enemies, attack_delay, gift, p_base, e_base = initialize_game()
+screen, player, bullet, player_life_texture, enemies, attack_delay, gift, p_base, e_base, score = initialize_game()
 menu = Menu.Menu(screen)
 while True:
     if menu.get_menu():
         running = True
-        screen, player, bullet, player_life_texture, enemies, attack_delay, gift, p_base, e_base = initialize_game()
+        screen, player, bullet, player_life_texture, enemies, attack_delay, gift, p_base, e_base, score = initialize_game()
 
     while running:
         if (player.life == 0):
@@ -104,6 +105,11 @@ while True:
         screen.update_screen(screen.map.obj_list, player, enemies, gift)
         screen.update_player_lives(player.life, player_life_texture)
         player.move()
+        screen.screen.blit(score.text_surface, (score.x, score.y))
+        if score.check_time_to_show():
+            screen.screen.blit(score.enemy_score, (score.enemy_x, score.enemy_y))
+        else:
+            screen.screen.blit(score.enemy_score, (-100, -100))
         screen.screen.blit(p_base.image, (p_base.x, p_base.y))
         screen.screen.blit(e_base.image, (e_base.x, e_base.y))
         for enemy in enemies:

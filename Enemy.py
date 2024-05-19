@@ -153,6 +153,9 @@ class Enemy:
         return True
     def destroy(self):
         bullet = self.bullet
+        #score
+
+
         if self.type == "usual":
             self.__init__(50 * 8, 50 * 3, 1, self.map, self.type)
         elif self.type == "attack":

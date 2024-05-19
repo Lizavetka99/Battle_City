@@ -10,9 +10,10 @@ WIDTH = 800
 HEIGHT = 800
 
 class Map:
-    def __init__(self, numb):
+    def __init__(self, numb, score):
         self.obj_list = []
         self.players = []
+        self.score = score
         self.bullets = []
         self.base = []
         if numb == 1:
@@ -59,6 +60,9 @@ class Map:
                 if type(bullet.player) == Player.Player:
                     Player.KILLS += 1
                     Player.LAST_ENEMY_KILLED_COORDS = (player.pos_x, player.pos_y)
+                    self.score.update_score()
+                    self.score.score_time = 0
+                    self.score.is_enemy_killed = True
                 #pos_x = player.pos_x
                 #pos_y = player.pos_y
                 player.destroy()
