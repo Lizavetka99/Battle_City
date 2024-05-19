@@ -5,13 +5,15 @@ import Bullet
 import pygame
 import Enemy
 import Gift
-
+import Menu
 
 
 pygame.init()
 pygame.mixer.init()
 
 pygame.mixer.music.load("assets/alblak-52-7-952-812-mp3.mp3")
+
+
 
 p_image_row = pygame.image.load("assets/base.jpg")
 e_image_row = pygame.image.load("assets/evil_base.jpg")
@@ -25,6 +27,8 @@ player = Player.Player(50 * 7, 50 * 12, 1, screen.map, 3)
 bullet = Bullet.Bullet(player, screen.map)
 player_life_texture = pygame.image.load("assets/Heart.png")
 player_life_texture = pygame.transform.scale(player_life_texture, (30, 30))
+
+menu = Menu.Menu(screen)
 
 enemy = Enemy.Enemy(50 * 8, 50 * 3, 1, screen.map, "usual")
 bullet_enemy = Bullet.Bullet(enemy, screen.map)
@@ -63,18 +67,22 @@ screen.map.add_bullet(bullet_enemy_armor)
 pygame.display.set_caption("Battle City")
 icon = pygame.image.load("assets/game_icon.jpg")
 pygame.display.set_icon(icon)
-running = True
+running = False
 enemies = [enemy, enemy_base_attack, speed_enemy, enemy_armor]
 attack_delay = 0
 pygame.mixer.music.play(loops=-1)
 gift = Gift.Gift(-100, -100)
+
+if menu.get_menu():
+    running = True
+
 while running:
     #GIFT#
     if Player.KILLS != 0 and Player.KILLS == 5 and gift.is_available == False:
         gift.spawn()
     if gift.is_available == True:
         gift.check_collision_with_player(player)
-    #####
+    #####w
 
     attack_delay += 1
     pygame.display.update()
