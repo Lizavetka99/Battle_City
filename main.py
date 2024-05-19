@@ -1,3 +1,5 @@
+import time
+
 import Player
 import Base
 import Screen
@@ -10,11 +12,19 @@ import Score
 
 pygame.init()
 pygame.mixer.init()
+game_end_timer = 5000
 p_base_heart_texture = pygame.image.load("assets/player_base_heart.png")
 p_base_heart_texture = pygame.transform.scale(p_base_heart_texture, (30, 30))
 e_base_heart_texture = pygame.image.load("assets/enemy_base_heart.png")
 e_base_heart_texture = pygame.transform.scale(e_base_heart_texture, (30, 30))
+lose_background = pygame.image.load("assets/lose.png")
+lose_background = pygame.transform.scale(lose_background, (800, 800))
+win_background = pygame.image.load("assets/win.jpg")
+win_background = pygame.transform.scale(win_background, (800, 800))
 running = False
+win_lose_y = 800
+win_text = pygame.font.SysFont("Ariel", 200).render("YOU WIN!", True,(255, 255, 255))
+lose_text = pygame.font.SysFont("Ariel", 200).render("YOU LOSE!", True,(255, 255, 255))
 def initialize_game():
     score = Score.Score()
     Player.KILLS = 0
@@ -84,11 +94,14 @@ def initialize_game():
 screen, player, bullet, player_life_texture, enemies, attack_delay, gift, p_base, e_base, score = initialize_game()
 menu = Menu.Menu(screen)
 while True:
-    if menu.get_menu():
-        running = True
-        screen, player, bullet, player_life_texture, enemies, attack_delay, gift, p_base, e_base, score = initialize_game()
-
+    if game_end_timer == 5000:
+        if menu.get_menu():
+            running = True
+            screen, player, bullet, player_life_texture, enemies, attack_delay, gift, p_base, e_base, score = initialize_game()
     while running:
+        win_lose_x = 70
+        win_lose_y = 800
+        game_end_timer = 0
         if p_base.lifes == 0 or e_base.lifes == 0:
             running = False
         if (player.life == 0):
@@ -143,5 +156,17 @@ while True:
             if event.type == pygame.QUIT:
                 running = False
                 pygame.quit()
+
+    if game_end_timer < 5000:
+        if win_lose_y > 350:
+            win_lose_y -= 1
+        if (p_base.lifes == 0) or (player.life == 0):
+            screen.screen.blit(lose_background, (0, 0))
+            screen.screen.blit(lose_text, (20, win_lose_y))
+        elif (e_base.lifes == 0):
+            screen.screen.blit(win_background, (0, 0))
+            screen.screen.blit(win_text, (70, win_lose_y))
+        pygame.display.update()
+        game_end_timer += 1
 
 print(Player.KILLS)

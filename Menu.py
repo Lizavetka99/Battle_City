@@ -7,7 +7,7 @@ class Menu:
         self.BUTTON_WIDTH = 200
         self.BUTTON_HEIGHT = 50
         self.BUTTON_SPACING = 10
-        self.BUTTON_COLOR = (200, 200, 200)
+        self.BUTTON_COLOR = (255, 255, 255)
         self.BUTTON_HOVER_COLOR = (150, 150, 150)
         self.TEXT_COLOR = (0, 0, 0)
         self.FONT_SIZE = 32
