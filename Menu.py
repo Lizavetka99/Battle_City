@@ -18,7 +18,7 @@ class Menu:
         self.screen = screen
         self.font = pygame.font.SysFont(self.FONT_NAME, self.FONT_SIZE)
     def get_menu(self):
-
+        pygame.init()
         while self.is_running:
             pygame.display.update()
             self.screen.screen.blit(self.background, (0, 0))
@@ -49,6 +49,7 @@ class Menu:
                 pygame.quit()
 
     def create_button(self, text, x, y, width, height, inactive_color, active_color):
+        pygame.init()
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
 

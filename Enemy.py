@@ -79,7 +79,8 @@ class Enemy:
         self.direction = "Down"
         self.pos_y = pos_y
         self.speed = speed
-
+        self.delay = 0
+        self.is_stacked = False
         self.enemy_anim_count = 0
         self.size = 44
         self.map = map
@@ -133,12 +134,18 @@ class Enemy:
             self.pos_x += MOVEMENT[self.direction][0] * speed
             self.pos_y += MOVEMENT[self.direction][1] * speed
         else:
-            self.get_random_direction(start, end)
+            if self.is_stacked == False:
+                self.get_random_direction(start, end)
+            else:
+                self.delay += 1
+                if self.delay > 50:
+                    self.get_random_direction(start, end)
 
         self.enemy_anim_count = (self.enemy_anim_count + 1) % 2
 
     def get_random_direction(self, start, end):
         self.direction = DIRECTION[random.randint(start, end)]
+        self.delay = 0
 
     def can_move(self):
         dx, dy = MOVEMENT[self.direction]
@@ -149,7 +156,11 @@ class Enemy:
         for player in self.map.players:
             if player == self: continue
             if self.collider.colliderect(player.collider):
+                if self.is_stacked == False:
+                    self.delay = 0
+                self.is_stacked = True
                 return False
+        self.is_stacked = False
         return True
     def destroy(self):
         bullet = self.bullet
