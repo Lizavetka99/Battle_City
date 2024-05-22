@@ -1,5 +1,6 @@
 import Player
 from Brick import Brick
+from Water import Water
 from Base import Base
 import pygame
 
@@ -16,8 +17,13 @@ class Map:
         self.score = score
         self.bullets = []
         self.base = []
+        self.baysic()
         if numb == 1:
             self.__level1__()
+        elif numb == 2:
+            self.__level2__()
+        elif numb == 3:
+            self.__level3__()
         else: self.level_test()
 
 
@@ -78,13 +84,6 @@ class Map:
 
     def __level1__(self):
         r = Brick.size
-        for i in range(16):
-            self.obj_list.append(Strong_wall(0, r * i))
-            self.obj_list.append(Strong_wall(15 * r, r * i))
-        for i in range(1, 15):
-            self.obj_list.append(Strong_wall(i * r, 0))
-            self.obj_list.append(Strong_wall(i * r, 15 * r))
-
         # боковые выступы
         for j in range(7, 9):
             self.obj_list.append(Strong_wall(1 * r, r * j))
@@ -116,4 +115,218 @@ class Map:
             self.obj_list.append(Brick((15 - i) * r, 7 * r))
         self.obj_list.append(Brick(3 * r, 7 * r))
         self.obj_list.append(Brick(12 * r, 8 * r))
+
+    def baysic(self):
+        r = Brick.size
+        for i in range(16):
+            self.obj_list.append(Strong_wall(0, r * i))
+            self.obj_list.append(Strong_wall(15 * r, r * i))
+        for i in range(1, 15):
+            self.obj_list.append(Strong_wall(i * r, 0))
+            self.obj_list.append(Strong_wall(i * r, 15 * r))
+
+    def __level2__(self):
+        r = Brick.size
+
+        # боковые выступы
+        self.obj_list.append(Brick(1 * r, r * 7))
+        self.obj_list.append(Brick(1 * r, r * 8))
+        self.obj_list.append(Brick(14 * r, r * 8))
+
+        self.obj_list.append(Brick(2 * r, r * 14))
+        self.obj_list.append(Brick(4 * r, r * 14))
+        self.obj_list.append(Brick(6 * r, r * 14))
+        self.obj_list.append(Brick(4 * r, r * 13))
+        self.obj_list.append(Brick(1 * r, r * 12))
+        self.obj_list.append(Brick(6 * r, r * 12))
+        self.obj_list.append(Brick(6 * r, r * 13))
+        self.obj_list.append(Brick(4 * r, r * 12))
+
+        self.obj_list.append(Brick(9 * r, r * 12))
+        self.obj_list.append(Brick(8 * r, r * 12))
+        self.obj_list.append(Brick(10 * r, r * 14))
+        self.obj_list.append(Brick(11 * r, r * 13))
+        #self.obj_list.append(Strong_wall(10 * r, r * 13))
+        self.obj_list.append(Brick(11 * r, r * 14))
+
+        self.obj_list.append(Brick(11 * r, r * 12))
+        self.obj_list.append(Brick(12 * r, r * 12))
+        self.obj_list.append(Brick(13 * r, r * 12))
+        self.obj_list.append(Brick(13 * r, r * 13))
+
+        self.obj_list.append(Brick(7 * r, r * 10))
+        self.obj_list.append(Brick(6 * r, r * 10))
+        self.obj_list.append(Brick(5 * r, r * 10))
+        self.obj_list.append(Brick(11 * r, r * 12))
+        self.obj_list.append(Brick(2 * r, r * 12))
+        self.obj_list.append(Brick(9 * r, r * 11))
+        self.obj_list.append(Brick(9 * r, r * 10))
+        self.obj_list.append(Brick(10 * r, r * 10))
+        self.obj_list.append(Brick(11 * r, r * 10))
+        self.obj_list.append(Brick(14 * r, r * 10))
+        self.obj_list.append(Brick(13 * r, r * 10))
+        self.obj_list.append(Brick(2 * r, r * 11))
+        self.obj_list.append(Brick(2 * r, r * 10))
+        self.obj_list.append(Brick(3 * r, r * 10))
+
+        self.obj_list.append(Brick(7 * r, r * 9))
+        self.obj_list.append(Brick(7 * r, r * 8))
+        self.obj_list.append(Brick(6 * r, r * 8))
+        self.obj_list.append(Brick(4 * r, r * 8))
+        self.obj_list.append(Brick(3 * r, r * 8))
+
+        self.obj_list.append(Brick(8 * r, r * 8))
+        self.obj_list.append(Brick(10 * r, r * 9))
+        self.obj_list.append(Brick(13 * r, r * 7))
+        self.obj_list.append(Brick(12 * r, r * 8))
+        self.obj_list.append(Brick(2 * r, r * 7))
+
+        self.obj_list.append(Brick(4 * r, r * 7))
+        self.obj_list.append(Brick(7 * r, r * 7))
+        self.obj_list.append(Brick(9 * r, r * 7))
+        self.obj_list.append(Brick(10 * r, r * 7))
+
+        self.obj_list.append(Brick(5 * r, r * 6))
+        self.obj_list.append(Brick(2 * r, r * 6))
+        self.obj_list.append(Brick(10 * r, r * 6))
+        self.obj_list.append(Brick(11 * r, r * 6))
+        self.obj_list.append(Brick(13 * r, r * 6))
+
+        self.obj_list.append(Brick(4 * r, r * 5))
+        self.obj_list.append(Brick(4 * r, r * 4))
+        self.obj_list.append(Brick(3 * r, r * 4))
+        self.obj_list.append(Brick(2 * r, r * 4))
+
+        self.obj_list.append(Brick(7 * r, r * 5))
+        self.obj_list.append(Brick(8 * r, r * 5))
+
+        self.obj_list.append(Brick(14 * r, r * 4))
+        self.obj_list.append(Brick(13 * r, r * 4))
+        self.obj_list.append(Brick(12 * r, r * 4))
+        self.obj_list.append(Brick(9 * r, r * 4))
+
+        self.obj_list.append(Brick(11 * r, r * 3))
+        self.obj_list.append(Brick(13 * r, r * 3))
+        self.obj_list.append(Brick(2 * r, r * 2))
+        self.obj_list.append(Brick(1 * r, r * 3))
+        self.obj_list.append(Brick(4 * r, r * 2))
+        self.obj_list.append(Brick(5 * r, r * 3))
+
+        self.obj_list.append(Brick(6 * r, r * 2))
+        self.obj_list.append(Brick(13 * r, r * 1))
+        self.obj_list.append(Brick(10 * r, r * 2))
+        self.obj_list.append(Brick(11 * r, r * 2))
+
+    def __level3__(self):
+        r = Brick.size
+        self.obj_list.append(Brick(1 * r, 7 * r))
+        self.obj_list.append(Brick(1 * r, 8 * r))
+        self.obj_list.append(Brick(1 * r, 12 * r))
+        self.obj_list.append(Brick(2 * r, 12 * r))
+        self.obj_list.append(Brick(2 * r, 13 * r))
+        self.obj_list.append(Brick(3 * r, 6 * r))
+        self.obj_list.append(Brick(4 * r, 6 * r))
+        self.obj_list.append(Brick(4 * r, 7 * r))
+        self.obj_list.append(Brick(4 * r, 11 * r))
+        self.obj_list.append(Brick(4 * r, 12 * r))
+        self.obj_list.append(Brick(4 * r, 13 * r))
+        self.obj_list.append(Brick(5 * r, 2 * r))
+        self.obj_list.append(Brick(5 * r, 3 * r))
+        self.obj_list.append(Brick(5 * r, 4 * r))
+        self.obj_list.append(Brick(5 * r, 7 * r))
+        self.obj_list.append(Brick(5 * r, 8 * r))
+        self.obj_list.append(Brick(5 * r, 11 * r))
+        self.obj_list.append(Brick(6 * r, 2 * r))
+        self.obj_list.append(Brick(6 * r, 13 * r))
+        self.obj_list.append(Brick(6 * r, 14 * r))
+        self.obj_list.append(Brick(9 * r, 2 * r))
+        self.obj_list.append(Brick(9 * r, 13 * r))
+        self.obj_list.append(Brick(10 * r, 2 * r))
+        self.obj_list.append(Brick(10 * r, 3 * r))
+        self.obj_list.append(Brick(10 * r, 4 * r))
+        self.obj_list.append(Brick(10 * r, 13 * r))
+        self.obj_list.append(Brick(11 * r, 6 * r))
+        self.obj_list.append(Brick(11 * r, 7 * r))
+        self.obj_list.append(Brick(11 * r, 13 * r))
+        self.obj_list.append(Brick(12 * r, 6 * r))
+        self.obj_list.append(Brick(13 * r, 3 * r))
+        self.obj_list.append(Brick(13 * r, 9 * r))
+        self.obj_list.append(Brick(13 * r, 10 * r))
+        self.obj_list.append(Brick(13 * r, 11 * r))
+        self.obj_list.append(Brick(14 * r, 2 * r))
+        self.obj_list.append(Brick(14 * r, 4 * r))
+
+        self.obj_list.append(Strong_wall(2 * r, 3 * r))
+        self.obj_list.append(Strong_wall(2 * r, 4 * r))
+        self.obj_list.append(Strong_wall(3 * r, 3 * r))
+        self.obj_list.append(Strong_wall(3 * r, 4 * r))
+        self.obj_list.append(Strong_wall(3 * r, 10 * r))
+        self.obj_list.append(Strong_wall(7 * r, 6 * r))
+        self.obj_list.append(Strong_wall(7 * r, 7 * r))
+        self.obj_list.append(Strong_wall(8 * r, 6 * r))
+        self.obj_list.append(Strong_wall(8 * r, 7 * r))
+        self.obj_list.append(Strong_wall(11 * r, 3 * r))
+        self.obj_list.append(Strong_wall(13 * r, 13 * r))
+
+        self.obj_list.append(Water(5 * r, 14 * r))
+        self.obj_list.append(Water(8 * r, 10 * r))
+        self.obj_list.append(Water(9 * r, 10 * r))
+        self.obj_list.append(Water(10 * r, 10 * r))
+        self.obj_list.append(Water(14 * r, 3 * r))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

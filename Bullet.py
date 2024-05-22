@@ -2,6 +2,7 @@ import pygame
 import Base
 import Screen
 import Player, Enemy
+import Water
 
 MOVEMENT = {
     "Up" : [0, -2],
@@ -53,6 +54,8 @@ class Bullet:
                     continue
                 if fencing.type == "player" and type(self.player) == Player.Player:
                     continue
+            if type(fencing) == Water.Water:
+                continue
             if self.collider.colliderect(fencing.collider):
                 self.map.del_fencing(fencing)
                 self.isCollision = True

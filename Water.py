@@ -8,3 +8,6 @@ class Water:
         self.type = "water"
         self.x = pos_x
         self.y = pos_y
+        self.image = water
+        self.collider = pygame.rect.Rect(self.x, self.y, 50, 50)
+        self.lifes = 10000000000000

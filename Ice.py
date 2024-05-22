@@ -8,3 +8,4 @@ class Ice:
         self.type = "ice"
         self.x = pos_x
         self.y = pos_y
+        self.image = ice
