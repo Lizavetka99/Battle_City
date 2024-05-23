@@ -26,10 +26,12 @@ class Screen:
         """
         self.screen.blit(self.background, (0, 0))
         self.screen.blit(gift.image, (gift.x, gift.y))
+        for obj in obj_list:
+            self.screen.blit(obj.image, (obj.x, obj.y))
         self.screen.blit(player.player_texture, (player.pos_x, player.pos_y))
         for enemy in enemies:
             self.screen.blit(enemy.enemy_texture, (enemy.pos_x, enemy.pos_y))
-        for obj in obj_list:
+        for obj in self.map.ebush_list:
             self.screen.blit(obj.image, (obj.x, obj.y))
 
 

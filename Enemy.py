@@ -1,11 +1,15 @@
 import pygame
 import random
 
+import Ice
+import Ebush
+
+SPEED = 0.5
 MOVEMENT = {
-    "Up" : [0, -0.5],
-    "Down" : [0,0.5],
-    "Left" : [-0.5, 0],
-    "Right" : [0.5, 0]
+    "Up" : [0, -SPEED],
+    "Down" : [0,SPEED],
+    "Left" : [-SPEED, 0],
+    "Right" : [SPEED, 0]
 }
 DIRECTION = ["Up", "Down", "Left", "Right"]
 
@@ -79,6 +83,7 @@ class Enemy:
         self.direction = "Down"
         self.pos_y = pos_y
         self.speed = speed
+        self.simple_speed = speed
         self.delay = 0
         self.is_stacked = False
         self.enemy_anim_count = 0
@@ -148,10 +153,16 @@ class Enemy:
         self.delay = 0
 
     def can_move(self):
+        self.speed = self.simple_speed
         dx, dy = MOVEMENT[self.direction]
         self.collider = pygame.rect.Rect(self.pos_x + dx, self.pos_y + dy, 40, 40)
         for brick in self.map.obj_list:
             if self.collider.colliderect(brick.collider):
+                if type(brick) == Ebush.Ebush:
+                    return True
+                if type(brick) == Ice.Ice:
+                    self.speed = 0.5
+                    return True
                 return False
         for player in self.map.players:
             if player == self: continue

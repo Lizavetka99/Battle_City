@@ -1,5 +1,6 @@
 import pygame
 import Base
+import Ice
 import Screen
 import Player, Enemy
 import Water
@@ -54,7 +55,7 @@ class Bullet:
                     continue
                 if fencing.type == "player" and type(self.player) == Player.Player:
                     continue
-            if type(fencing) == Water.Water:
+            if type(fencing) == Water.Water or type(fencing) == Ice.Ice:
                 continue
             if self.collider.colliderect(fencing.collider):
                 self.map.del_fencing(fencing)

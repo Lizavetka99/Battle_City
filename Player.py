@@ -1,15 +1,17 @@
 import pygame
 
+import Ebush
 import Gift
+import Ice
 
 KILLS = 0 # если 5 киллов - то неуязвимость
 LAST_ENEMY_KILLED_COORDS = None
-
+SPEED = 1
 MOVEMENT = {
-    "Up" : [0, -1],
-    "Down" : [0, 1],
-    "Left" : [-1, 0],
-    "Right" : [1, 0]
+    "Up" : [0, -SPEED],
+    "Down" : [0, SPEED],
+    "Left" : [-SPEED, 0],
+    "Right" : [SPEED, 0]
 }
 player_anim = {
     pygame.K_w: [pygame.image.load("assets/player_tank/Player_tank_1_w.png"),
@@ -72,11 +74,18 @@ class Player:
         self.player_anim_count = (self.player_anim_count + 1) % 2
 
     def can_move(self):
+        self.speed = 1
         dx,dy = MOVEMENT[self.direction]
         self.collider = pygame.rect.Rect(self.pos_x + dx, self.pos_y + dy, 40, 40)
         for fencing in self.map.obj_list:
             #if type(fencing) == Gift.Gift: continue
             if self.collider.colliderect(fencing.collider):
+
+                if type(fencing) == Ebush.Ebush:
+                    continue
+                if type(fencing) == Ice.Ice:
+                    self.speed = 0.5
+                    continue
                 return False
         for player in self.map.players:
             if player == self: continue

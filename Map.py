@@ -1,5 +1,7 @@
 import Player
 from Brick import Brick
+from Ebush import Ebush
+from Ice import Ice
 from Water import Water
 from Base import Base
 import pygame
@@ -18,6 +20,7 @@ class Map:
         self.bullets = []
         self.base = []
         self.baysic()
+        self.ebush_list = []
         if numb == 1:
             self.__level1__()
         elif numb == 2:
@@ -118,6 +121,25 @@ class Map:
         self.obj_list.append(Brick(3 * r, 7 * r))
         self.obj_list.append(Brick(12 * r, 8 * r))
 
+        for j in [1,14]:
+            for i in range(2, 5):
+                self.ebush_list.append(Ebush(j * r, i * r))
+                self.ebush_list.append(Ebush((15 - j) * r, i * r))
+                self.ebush_list.append(Ebush(j * r, (15 - i) * r))
+                self.ebush_list.append(Ebush((15 - j) * r, (15 - i) * r))
+
+        self.obj_list.append(Ice(5 * r, 11 * r))
+        self.obj_list.append(Ice(5 * r, 12 * r))
+        self.obj_list.append(Ice(5 * r, 13 * r))
+        self.obj_list.append(Ice(5 * r, 14 * r))
+
+        self.obj_list.append(Ice(10 * r, 11 * r))
+        self.obj_list.append(Ice(10 * r, 12 * r))
+        self.obj_list.append(Ice(10 * r, 13 * r))
+        self.obj_list.append(Ice(10 * r, 14 * r))
+
+
+
     def baysic(self):
         r = Brick.size
         for i in range(16):
@@ -126,6 +148,7 @@ class Map:
         for i in range(1, 15):
             self.obj_list.append(Strong_wall(i * r, 0))
             self.obj_list.append(Strong_wall(i * r, 15 * r))
+
 
     def __level2__(self):
         r = Brick.size
@@ -318,6 +341,11 @@ class Map:
         self.obj_list.append(Strong_wall(13 * r, 12 * r))
         self.obj_list.append(Strong_wall(13 * r, 13 * r))
 
+
+    def draw_ebush(self):
+        r = 50
+        #self.ebush_list.append(Ebush(r * 8, r * 8))
+        #self.ebush_list.append(Ebush(r * 14, r * 14))
 
 
 

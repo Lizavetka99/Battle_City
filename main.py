@@ -105,6 +105,7 @@ while True:
             if menu.choose_level():
                 running = True
                 screen, player, bullet, player_life_texture, enemies, attack_delay, gift, p_base, e_base, score = initialize_game()
+                screen.map.draw_ebush()
                 print("СЮДА ТОЖЕ")
     while running:
         choosing = False
