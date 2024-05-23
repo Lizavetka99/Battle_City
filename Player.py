@@ -3,7 +3,7 @@ import pygame
 import Ebush
 import Gift
 import Ice
-
+import Base
 KILLS = 0 # если 5 киллов - то неуязвимость
 LAST_ENEMY_KILLED_COORDS = None
 SPEED = 1
@@ -50,6 +50,10 @@ class Player:
 
     def move(self):
         pressed_key = pygame.key.get_pressed()
+        if pressed_key[pygame.K_b] and pressed_key[pygame.K_a] and pressed_key[pygame.K_y]:
+            self.life += 1
+
+
         if pressed_key[pygame.K_w]:
             self.direction = "Up"
             self.player_texture = player_anim[pygame.K_w][
@@ -74,6 +78,11 @@ class Player:
         self.player_anim_count = (self.player_anim_count + 1) % 2
 
     def can_move(self):
+        pressed_key = pygame.key.get_pressed()
+        if pressed_key[pygame.K_u] and pressed_key[pygame.K_r] and pressed_key[pygame.K_a]:
+            for base in self.map.base:
+                if base.type == "enemy":
+                    base.lifes -= 1
         self.speed = 1
         dx,dy = MOVEMENT[self.direction]
         self.collider = pygame.rect.Rect(self.pos_x + dx, self.pos_y + dy, 40, 40)
