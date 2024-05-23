@@ -93,12 +93,21 @@ def initialize_game():
 
 screen, player, bullet, player_life_texture, enemies, attack_delay, gift, p_base, e_base, score = initialize_game()
 menu = Menu.Menu(screen)
+running = False
+choosing = False
 while True:
     if game_end_timer == 5000:
         if menu.get_menu():
-            running = True
-            screen, player, bullet, player_life_texture, enemies, attack_delay, gift, p_base, e_base, score = initialize_game()
+            choosing = True
+
+        if choosing:
+            print("ЗАХОЖУ")
+            if menu.choose_level():
+                running = True
+                screen, player, bullet, player_life_texture, enemies, attack_delay, gift, p_base, e_base, score = initialize_game()
+                print("СЮДА ТОЖЕ")
     while running:
+        choosing = False
         win_lose_x = 70
         win_lose_y = 800
         game_end_timer = 0

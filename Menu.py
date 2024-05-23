@@ -1,5 +1,5 @@
 import pygame
-
+import Screen
 class Menu:
     def __init__(self, screen):
         self.SCREEN_WIDTH = 800
@@ -42,11 +42,80 @@ class Menu:
                                              self.BUTTON_COLOR,
                                              self.BUTTON_HOVER_COLOR)
             if start_button:
-                running = False
+                #running = False
                 return True
             elif quit_button:
                 running = False
                 pygame.quit()
+
+
+    def choose_level(self):
+        pygame.init()
+        while self.is_running:
+            pygame.display.update()
+            self.screen.screen.blit(self.background, (0, 0))
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    self.running = False
+                    pygame.quit()
+            level_1_button = self.create_button('1 level',
+                                              self.SCREEN_WIDTH / 4 - self.BUTTON_SPACING,
+                                              self.SCREEN_HEIGHT / 4 - self.BUTTON_HEIGHT - self.BUTTON_SPACING,
+                                              self.BUTTON_WIDTH,
+                                              self.BUTTON_HEIGHT,
+                                              self.BUTTON_COLOR,
+                                              self.BUTTON_HOVER_COLOR)
+            level_2_button = self.create_button('2 level',
+                                             2*self.SCREEN_WIDTH / 4 + self.BUTTON_SPACING,
+                                             self.SCREEN_HEIGHT / 4 - self.BUTTON_HEIGHT - self.BUTTON_SPACING,
+                                             self.BUTTON_WIDTH,
+                                             self.BUTTON_HEIGHT,
+                                             self.BUTTON_COLOR,
+                                             self.BUTTON_HOVER_COLOR)
+            level_3_button = self.create_button('3 level',
+                                                self.SCREEN_WIDTH / 4 - self.BUTTON_SPACING,
+                                                2*self.SCREEN_HEIGHT / 4 - 3*self.BUTTON_HEIGHT - self.BUTTON_SPACING,
+                                                self.BUTTON_WIDTH,
+                                                self.BUTTON_HEIGHT,
+                                                self.BUTTON_COLOR,
+                                                self.BUTTON_HOVER_COLOR)
+            level_4_button = self.create_button('4 level',
+                                                2*self.SCREEN_WIDTH / 4 + self.BUTTON_SPACING,
+                                                2*self.SCREEN_HEIGHT / 4 - 3*self.BUTTON_HEIGHT - self.BUTTON_SPACING,
+                                                self.BUTTON_WIDTH,
+                                                self.BUTTON_HEIGHT,
+                                                self.BUTTON_COLOR,
+                                                self.BUTTON_HOVER_COLOR)
+            # quit_button = self.create_button('Exit',
+            #                                     self.SCREEN_WIDTH / 2 - self.BUTTON_WIDTH / 2,
+            #                                     self.SCREEN_HEIGHT / 2 + self.BUTTON_SPACING,
+            #                                     self.BUTTON_WIDTH,
+            #                                     self.BUTTON_HEIGHT,
+            #                                     self.BUTTON_COLOR,
+            #                                     self.BUTTON_HOVER_COLOR)
+            if level_1_button:
+                running = False
+                Screen.NUMB = 1
+                return True
+
+            elif level_2_button:
+                running = False
+                Screen.NUMB = 2
+                return True
+            elif level_3_button:
+                running = False
+                Screen.NUMB = 3
+                return True
+            elif level_4_button:
+                running = False
+                Screen.NUMB = 4
+                return True
+            # elif quit_button:
+            #     running = False
+            #     pygame.quit()
+            #     return False
+        return False
 
     def create_button(self, text, x, y, width, height, inactive_color, active_color):
         pygame.init()

@@ -7,7 +7,7 @@ import pygame
 WIDTH = 800
 HEIGHT = 800
 BACKGROUND = "assets/bg_one_tone.jpg"
-
+NUMB = 0
 
 class Screen:
     def __init__(self, score):
@@ -16,7 +16,7 @@ class Screen:
         self.background = pygame.image.load(BACKGROUND)
         self.background = pygame.transform.\
             scale(self.background, (WIDTH, HEIGHT))
-        self.map = Map(4, score)
+        self.map = Map(NUMB, score)
 
     def update_screen(self, obj_list, player: Player.Player, enemies: [Enemy.Enemy], gift):
         """
