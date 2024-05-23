@@ -16,7 +16,7 @@ class Screen:
         self.background = pygame.image.load(BACKGROUND)
         self.background = pygame.transform.\
             scale(self.background, (WIDTH, HEIGHT))
-        self.map = Map(3, score)
+        self.map = Map(4, score)
 
     def update_screen(self, obj_list, player: Player.Player, enemies: [Enemy.Enemy], gift):
         """

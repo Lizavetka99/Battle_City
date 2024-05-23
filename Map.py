@@ -24,6 +24,8 @@ class Map:
             self.__level2__()
         elif numb == 3:
             self.__level3__()
+        elif numb == 4:
+            self.__level4__()
         else: self.level_test()
 
 
@@ -274,6 +276,47 @@ class Map:
         self.obj_list.append(Water(10 * r, 10 * r))
         self.obj_list.append(Water(14 * r, 3 * r))
 
+    def __level4__(self):
+        r = Brick.size
+        self.obj_list.append(Strong_wall(2 * r, 6 * r))
+        self.obj_list.append(Strong_wall(2 * r, 5 * r))
+        self.obj_list.append(Strong_wall(2 * r, 7 * r))
+        self.obj_list.append(Strong_wall(2 * r, 8 * r))
+        self.obj_list.append(Strong_wall(2 * r, 9 * r))
+        self.obj_list.append(Strong_wall(2 * r, 10 * r))
+        self.obj_list.append(Strong_wall(3 * r, 7 * r))
+        self.obj_list.append(Strong_wall(3 * r, 10 * r))
+        self.obj_list.append(Strong_wall(4 * r, 7 * r))
+        self.obj_list.append(Strong_wall(4 * r, 8 * r))
+        self.obj_list.append(Strong_wall(4 * r, 9 * r))
+        self.obj_list.append(Strong_wall(4 * r, 10 * r))
+        self.obj_list.append(Strong_wall(6 * r, 7 * r))
+        self.obj_list.append(Strong_wall(6 * r, 8 * r))
+        self.obj_list.append(Strong_wall(6 * r, 9 * r))
+        self.obj_list.append(Strong_wall(6 * r, 10 * r))
+        self.obj_list.append(Strong_wall(7 * r, 7 * r))
+        self.obj_list.append(Strong_wall(7 * r, 10 * r))
+        self.obj_list.append(Strong_wall(8 * r, 6 * r))
+        self.obj_list.append(Strong_wall(8 * r, 7 * r))
+        self.obj_list.append(Strong_wall(8 * r, 8 * r))
+        self.obj_list.append(Strong_wall(8 * r, 9 * r))
+        self.obj_list.append(Strong_wall(8 * r, 10 * r))
+        self.obj_list.append(Strong_wall(9 * r, 10 * r))
+        self.obj_list.append(Strong_wall(11 * r, 7 * r))
+        self.obj_list.append(Strong_wall(11 * r, 8 * r))
+        self.obj_list.append(Strong_wall(11 * r, 9 * r))
+        self.obj_list.append(Strong_wall(11 * r, 10 * r))
+        self.obj_list.append(Strong_wall(11 * r, 12 * r))
+        self.obj_list.append(Strong_wall(11 * r, 13 * r))
+        self.obj_list.append(Strong_wall(12 * r, 10 * r))
+        self.obj_list.append(Strong_wall(12 * r, 13 * r))
+        self.obj_list.append(Strong_wall(13 * r, 7 * r))
+        self.obj_list.append(Strong_wall(13 * r, 8 * r))
+        self.obj_list.append(Strong_wall(13 * r, 9 * r))
+        self.obj_list.append(Strong_wall(13 * r, 10 * r))
+        self.obj_list.append(Strong_wall(13 * r, 11 * r))
+        self.obj_list.append(Strong_wall(13 * r, 12 * r))
+        self.obj_list.append(Strong_wall(13 * r, 13 * r))
 
 
 
