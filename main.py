@@ -99,14 +99,11 @@ while True:
     if game_end_timer == 5000:
         if menu.get_menu():
             choosing = True
-
         if choosing:
-            print("ЗАХОЖУ")
             if menu.choose_level():
                 running = True
                 screen, player, bullet, player_life_texture, enemies, attack_delay, gift, p_base, e_base, score = initialize_game()
                 screen.map.draw_ebush()
-                print("СЮДА ТОЖЕ")
     while running:
         choosing = False
         win_lose_x = 70

@@ -51,9 +51,7 @@ class Player:
     def move(self):
         pressed_key = pygame.key.get_pressed()
         if pressed_key[pygame.K_b] and pressed_key[pygame.K_a] and pressed_key[pygame.K_y]:
-            self.life += 1
-
-
+            self.life = 10
         if pressed_key[pygame.K_w]:
             self.direction = "Up"
             self.player_texture = player_anim[pygame.K_w][
@@ -82,7 +80,7 @@ class Player:
         if pressed_key[pygame.K_u] and pressed_key[pygame.K_r] and pressed_key[pygame.K_a]:
             for base in self.map.base:
                 if base.type == "enemy":
-                    base.lifes -= 1
+                    base.lifes = 0
         self.speed = 1
         dx,dy = MOVEMENT[self.direction]
         self.collider = pygame.rect.Rect(self.pos_x + dx, self.pos_y + dy, 40, 40)
