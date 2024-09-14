@@ -3,7 +3,7 @@ import random
 
 import Ice
 import Ebush
-
+pygame.mixer.init()
 SPEED = 0.5
 MOVEMENT = {
     "Up" : [0, -SPEED],
@@ -13,7 +13,7 @@ MOVEMENT = {
 }
 DIRECTION = ["Up", "Down", "Left", "Right"]
 
-
+sound_effect = pygame.mixer.Sound("assets/tankovyiy-vyistrel.mp3")
 
 enemy_anim = {
     "Up": [pygame.image.load("assets/enemy/bot/bot_1_w.png"),
@@ -119,6 +119,7 @@ class Enemy:
             self.attack_delay += 1
             if self.attack_delay == 200:
                 self.bullet.setPosition()
+                sound_effect.play()
                 self.bullet.Move()
             self.attack_delay %= 201
         if self.bullet.is_shooted:

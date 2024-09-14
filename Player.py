@@ -33,6 +33,7 @@ for image in player_anim.keys():
 class Player:
     def __init__(self, pos_x, pos_y, speed, map, lives_count):
         self.pos_x = pos_x
+        self.bullet = None
         self.is_alive = False
         self.is_alive_time = 0
         self.direction = "Up"

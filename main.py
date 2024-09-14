@@ -21,6 +21,7 @@ lose_background = pygame.image.load("assets/lose.png")
 lose_background = pygame.transform.scale(lose_background, (800, 800))
 win_background = pygame.image.load("assets/win.jpg")
 win_background = pygame.transform.scale(win_background, (800, 800))
+sound_effect = pygame.mixer.Sound("assets/tankovyiy-vyistrel.mp3")
 running = False
 win_lose_y = 800
 win_text = pygame.font.SysFont("Ariel", 200).render("YOU WIN!", True,(255, 255, 255))
@@ -146,6 +147,7 @@ while True:
         if pygame.key.get_pressed()[pygame.K_SPACE] and (not bullet.is_shooted):
             if (attack_delay > 100):
                 bullet.setPosition()
+                sound_effect.play()
 
                 attack_delay = 0
             screen.screen.blit(bullet.texture, (bullet.X, bullet.Y))

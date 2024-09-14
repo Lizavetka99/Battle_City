@@ -28,6 +28,9 @@ class Bullet:
         self.is_shooted = False
         self.isCollision = False
         self.collider = pygame.rect.Rect(self.X, self.Y, 16, 16)
+        self.direction = self.player.direction
+        self.texture = pygame.image.load(textures[self.direction])
+        self.texture = pygame.transform.scale(self.texture, (16, 16))
 
 
     def setPosition(self):
@@ -40,8 +43,6 @@ class Bullet:
         self.direction = self.player.direction
         self.X, self.Y = (self.CORRECT_SDVIG[self.direction][0], self.CORRECT_SDVIG[self.direction][1])
         self.is_shooted = True
-        self.texture = pygame.image.load(textures[self.direction])
-        self.texture = pygame.transform.scale(self.texture, (16, 16))
         self.collider = pygame.rect.Rect(self.X, self.Y, 16, 16)
 
     def Move(self):
